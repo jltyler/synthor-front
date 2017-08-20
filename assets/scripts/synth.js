@@ -70,11 +70,16 @@ let OSC1SUSTAIN = 1.0
 let OSC1RELEASE = 0.4
 
 class Voice {
-  constructor (note, osc_id = 0) {
+  constructor (note, oscId = 0) {
     const now = audioCtx.currentTime
+    const options = oscOptions[oscId]
     this.osc = audioCtx.createOscillator()
     this.osc.frequency.value = freqArray[note]
-    this.osc.type = oscOptions[osc_id].type
+    this.osc.type = options.type
+    this.env = audioCtx.createGain()
+    this.env.gain.setValueAtTime(0.0, now)
+    this.env.gain.linearRampToValueAtTime(1, now + options.attack)
+    this.env.gain.linearRampToValueAtTime(options.sustain, now + options.attack + options.decay)
   }
 }
 
@@ -103,8 +108,6 @@ const playNote = (note, octave = 3) => {
   // Gain envelope
   const gainEnv = audioCtx.createGain()
   // We'll need these values for when the key is released
-  gainEnv.release = release
-  gainEnv.sustain = sustain
   gainEnv.gain.setValueAtTime(0.0, now)
   // Set attack and decay for gain envelope
   gainEnv.gain.linearRampToValueAtTime(1, now + OSC1ATTACK)
