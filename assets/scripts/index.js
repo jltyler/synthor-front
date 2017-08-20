@@ -2,9 +2,13 @@
 
 const setAPIOrigin = require('../../lib/set-api-origin')
 const config = require('./config')
+require('./knob.min')
+const synth = require('./synth')
+
 
 $(() => {
   setAPIOrigin(location, config)
+  synth.init()
 })
 
 // use require with a reference to bundle the file and use it in this file

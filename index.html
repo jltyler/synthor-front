@@ -12,14 +12,30 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body class="container-fluid">
-      <h1>Example</h1>
-
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-      ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.</p>
+      <nav class="row nav">
+        <ul>
+          <li><button type="button"class="btn btn-info btn-lg">Oscillators</button></li>
+          <li><button type="button"class="btn btn-info btn-lg">Filter</button></li>
+        </ul>
+      </nav>
+      <div class="row">
+        <div class="col-md-4 osc1">
+          <h1>Osc1</h1>
+          <h3>Type</h3>
+          <select id="osc1-waveform">
+            <option value="sine">Sine</option>
+            <option value="sawtooth" selected>Sawtooth</option>
+            <option value="square">Square</option>
+            <option value="triangle">Triangle</option>
+          </select>
+          <h3>Volume</h3>
+          <input type="text" id="osc1-volume" value="50">
+          <h3>Volume Envelope</h3>
+          <input type="text" id="osc1-attack" value="0.1">
+          <input type="text" id="osc1-decay" value="0.1">
+          <input type="text" id="osc1-sustain" value="1.0">
+          <input type="text" id="osc1-release" value="0.3">
+        </div>
+      </div>
     </body>
 </html>
