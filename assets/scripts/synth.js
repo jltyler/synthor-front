@@ -64,16 +64,10 @@ const oscOptions = [
   }
 ]
 
-let OSC1ATTACK = 0.1
-let OSC1DECAY = 0.1
-let OSC1SUSTAIN = 1.0
-let OSC1RELEASE = 0.4
-
 class Voice {
   constructor (note, oscId = 0) {
     const now = audioCtx.currentTime
     this.options = oscOptions[oscId]
-    // this.oscId = oscId
 
     this.osc = audioCtx.createOscillator()
     this.osc.frequency.value = freqArray[note]
@@ -84,7 +78,6 @@ class Voice {
     this.env.gain.setValueAtTime(0.0, now)
     this.env.gain.linearRampToValueAtTime(1, now + this.options.attack)
     this.env.gain.linearRampToValueAtTime(this.options.sustain, now + this.options.attack + this.options.decay)
-    // this.release = options.release
 
     // Connect the nodes and start
     this.osc.connect(this.env)
@@ -167,7 +160,7 @@ $('#osc1-attack').knob({
   min: 0,
   max: 10,
   step: 0.1,
-  release (val) { OSC1ATTACK = val }
+  release (val) { oscOptions[0].attack = val }
 })
 
 $('#osc1-decay').knob({
@@ -178,7 +171,7 @@ $('#osc1-decay').knob({
   min: 0,
   max: 10,
   step: 0.1,
-  release (val) { OSC1DECAY = val }
+  release (val) { oscOptions[0].decay = val }
 })
 
 $('#osc1-release').knob({
@@ -189,7 +182,7 @@ $('#osc1-release').knob({
   min: 0,
   max: 10,
   step: 0.1,
-  release (val) { OSC1RELEASE = val }
+  release (val) { oscOptions[0].release = val }
 })
 
 $('#osc1-sustain').knob({
@@ -200,7 +193,12 @@ $('#osc1-sustain').knob({
   min: 0,
   max: 1,
   step: 0.05,
-  release (val) { OSC1SUSTAIN = val }
+  release (val) { oscOptions[0].sustain = val }
+})
+
+$('#osc1-waveform').on('change', e => {
+  console.log(e);
+  oscOptions[0].type = e.target.value
 })
 // $('#osc1-volume').on('change', (e) => {
 //   osc1GainNode.gain.value = e.target.value / 100
