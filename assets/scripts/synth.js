@@ -85,6 +85,7 @@ class Voice {
 
     // Filter envelope
     this.fenv = audioCtx.createBiquadFilter()
+    this.fenv.Q.setValueAtTime(10, now)
     this.fenv.frequency.setValueAtTime(0, now)
     this.fenv.frequency.linearRampToValueAtTime(12000, now + this.options.fattack)
     this.fenv.frequency.linearRampToValueAtTime(this.options.fsustain, now + this.options.fattack + this.options.fdecay)
@@ -120,7 +121,7 @@ class Voice {
 
 // Plays a note
 const playNote = (note, octave = 3) => {
-  console.log('playNote(', note, ')');
+  // console.log('playNote(', note, ')');
   // Only play on valid note keys
   if (note === undefined) {
     return
@@ -133,12 +134,12 @@ const playNote = (note, octave = 3) => {
 }
 
 const stopNote = (note, octave = 3) => {
-  console.log('stopNote(', note, ')');
+  // console.log('stopNote(', note, ')');
   if (note === undefined) {
     return
   }
   if (osc1[note].length > 0) {
-    console.log('release', note);
+    // console.log('release', note);
     const voice = osc1[note].shift()
     voice.release()
   }
