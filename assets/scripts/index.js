@@ -2,9 +2,9 @@
 
 const setAPIOrigin = require('../../lib/set-api-origin')
 const config = require('./config')
-require('./knob.min')
+// require('./knob.min')
+require('./jquery.knob')
 const synth = require('./synth')
-
 
 $(() => {
   setAPIOrigin(location, config)
