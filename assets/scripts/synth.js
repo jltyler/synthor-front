@@ -72,14 +72,40 @@ let OSC1RELEASE = 0.4
 class Voice {
   constructor (note, oscId = 0) {
     const now = audioCtx.currentTime
-    const options = oscOptions[oscId]
+    this.options = oscOptions[oscId]
+    // this.oscId = oscId
+
     this.osc = audioCtx.createOscillator()
     this.osc.frequency.value = freqArray[note]
-    this.osc.type = options.type
+    this.osc.type = this.options.type
+
+    // Gain envelope
     this.env = audioCtx.createGain()
     this.env.gain.setValueAtTime(0.0, now)
-    this.env.gain.linearRampToValueAtTime(1, now + options.attack)
-    this.env.gain.linearRampToValueAtTime(options.sustain, now + options.attack + options.decay)
+    this.env.gain.linearRampToValueAtTime(1, now + this.options.attack)
+    this.env.gain.linearRampToValueAtTime(this.options.sustain, now + this.options.attack + this.options.decay)
+    // this.release = options.release
+
+    // Connect the nodes and start
+    this.osc.connect(this.env)
+    this.env.connect(compressor)
+    this.osc.start()
+  }
+
+  release () {
+    const now = audioCtx.currentTime
+
+    // Stop any values and start release
+    this.env.gain.cancelScheduledValues(now)
+    this.env.gain.setValueAtTime(this.env.gain.value, now)
+    this.env.gain.linearRampToValueAtTime(0.0, now + this.options.release)
+
+    // Once release is finished, we stop the oscillator and remove connections
+    setTimeout(() => {
+      this.osc.stop()
+      this.osc.disconnect()
+      this.env.disconnect()
+    }, this.options.release * 1000)
   }
 }
 
@@ -90,41 +116,11 @@ const playNote = (note, octave = 3) => {
   if (note === undefined) {
     return
   }
-  // For use in scheduling value changes
-  const now = audioCtx.currentTime
-  // Oscillator
-  const newOsc = audioCtx.createOscillator()
-  newOsc.frequency.value = freqArray[note]
-  newOsc.type = osc1WaveForm.val()
-  // Tremolo
-  const modOsc = audioCtx.createOscillator()
-  modOsc.frequency.value = 5.0
-  modOsc.start()
-  const modGain = audioCtx.createGain()
-  modGain.gain.value = 1.0
-  modOsc.connect(modGain)
-  modGain.connect(newOsc.frequency)
-  // modOsc.connect(newOsc.frequency)
-  // Gain envelope
-  const gainEnv = audioCtx.createGain()
-  // We'll need these values for when the key is released
-  gainEnv.gain.setValueAtTime(0.0, now)
-  // Set attack and decay for gain envelope
-  gainEnv.gain.linearRampToValueAtTime(1, now + OSC1ATTACK)
-  gainEnv.gain.linearRampToValueAtTime(OSC1SUSTAIN, now + OSC1ATTACK + OSC1DECAY)
-  // If osc1 for note is already played push the new one into the array,
-  // otherwise create a new array to use
   if (!osc1[note]) {
-    osc1[note] = [newOsc]
-    gain1[note] = [gainEnv]
+    osc1[note] = [new Voice(note, 0)]
   } else {
-    osc1[note].push(newOsc)
-    gain1[note].push(gainEnv)
+    osc1[note].push(new Voice(note, 0))
   }
-  // Connect the osc to the gain and the gain to the compressor and start e up
-  newOsc.connect(gainEnv)
-  gainEnv.connect(compressor)
-  newOsc.start()
 }
 
 const stopNote = (note, octave = 3) => {
@@ -132,26 +128,10 @@ const stopNote = (note, octave = 3) => {
   if (note === undefined) {
     return
   }
-  if (osc1[note] && osc1[note].length > 0) {
-    const now = audioCtx.currentTime
-    const osc = osc1[note].shift()
-    const gain = gain1[note].shift()
-    // console.log('osc1[' + note + ']:', osc1[note])
-
-    gain.gain.cancelScheduledValues(now)
-    // console.log('sustain:', gain.sustain);
-    // console.log('release:', gain.release);
-    gain.gain.setValueAtTime(gain.gain.value, now)
-    // console.log(gain.gain.value);
-    gain.gain.linearRampToValueAtTime(0.0, now + OSC1RELEASE)
-    // console.log(gain.gain.value);
-    setTimeout(() => {
-      osc.disconnect()
-      gain.disconnect()
-      osc.stop()
-      // delete osc1[note]
-      // delete gain1[note]
-    }, OSC1RELEASE * 1000)
+  if (osc1[note].length > 0) {
+    console.log('release', note);
+    const voice = osc1[note].shift()
+    voice.release()
   }
 }
 
