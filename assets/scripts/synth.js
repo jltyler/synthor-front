@@ -1,6 +1,3 @@
-// Select usable control elements
-const osc1WaveForm = $('#osc1-waveform')
-
 // Main context
 const audioCtx = new window.AudioContext()
 
@@ -43,7 +40,6 @@ const keyMap = {
 
 // Ends up being objects of arrays so I can have multiple of the same note playing
 const osc1 = {}
-const gain1 = {}
 
 // Main gain node for osc1
 const osc1GainNode = audioCtx.createGain()
@@ -54,17 +50,22 @@ osc1GainNode.connect(audioCtx.destination)
 const compressor = audioCtx.createDynamicsCompressor()
 compressor.connect(osc1GainNode)
 
+const filterOptions = {
+  attack: 0.1,
+  decay: 0.1,
+  sustain: 8000,
+  release: 0.4,
+  peak: 12000,
+  q: 10
+}
+
 const oscOptions = [
   {
     type: 'sawtooth',
     attack: 0.1,
     decay: 0.1,
     sustain: 1.0,
-    release: 0.4,
-    fattack: 0.1,
-    fdecay: 0.1,
-    fsustain: 8000,
-    frelease: 0.4
+    release: 0.4
   }
 ]
 
@@ -85,10 +86,10 @@ class Voice {
 
     // Filter envelope
     this.fenv = audioCtx.createBiquadFilter()
-    this.fenv.Q.setValueAtTime(10, now)
+    this.fenv.Q.setValueAtTime(filterOptions.q, now)
     this.fenv.frequency.setValueAtTime(0, now)
-    this.fenv.frequency.linearRampToValueAtTime(12000, now + this.options.fattack)
-    this.fenv.frequency.linearRampToValueAtTime(this.options.fsustain, now + this.options.fattack + this.options.fdecay)
+    this.fenv.frequency.linearRampToValueAtTime(filterOptions.peak, now + filterOptions.attack)
+    this.fenv.frequency.linearRampToValueAtTime(filterOptions.sustain, now + filterOptions.attack + filterOptions.decay)
 
     // Connect the nodes and start
     this.osc.connect(this.fenv)
@@ -107,7 +108,7 @@ class Voice {
 
     this.fenv.frequency.cancelScheduledValues(now)
     this.fenv.frequency.setValueAtTime(this.fenv.frequency.value, now)
-    this.fenv.frequency.linearRampToValueAtTime(0.0, now + this.options.frelease)
+    this.fenv.frequency.linearRampToValueAtTime(0.0, now + filterOptions.release)
 
     // Once release is finished, we stop the oscillator and remove connections
     setTimeout(() => {
@@ -115,7 +116,7 @@ class Voice {
       this.osc.disconnect()
       this.fenv.disconnect()
       this.env.disconnect()
-    }, Math.max(this.options.release, this.options.frelease) * 1000)
+    }, Math.max(this.options.release, filterOptions.release) * 1000)
   }
 }
 
@@ -226,7 +227,7 @@ $('#filter-attack').knob({
   min: 0,
   max: 10,
   step: 0.1,
-  release (val) { oscOptions[0].fattack = val }
+  release (val) { filterOptions.attack = val }
 })
 
 $('#filter-decay').knob({
@@ -237,7 +238,7 @@ $('#filter-decay').knob({
   min: 0,
   max: 10,
   step: 0.1,
-  release (val) { oscOptions[0].fdecay = val }
+  release (val) { filterOptions.decay = val }
 })
 
 $('#filter-release').knob({
@@ -248,7 +249,7 @@ $('#filter-release').knob({
   min: 0,
   max: 10,
   step: 0.1,
-  release (val) { oscOptions[0].frelease = val }
+  release (val) { filterOptions.release = val }
 })
 
 $('#filter-sustain').knob({
@@ -259,7 +260,7 @@ $('#filter-sustain').knob({
   min: 0,
   max: 10000,
   step: 50,
-  release (val) { oscOptions[0].fsustain = val }
+  release (val) { filterOptions.sustain = val }
 })
 // $('#osc1-volume').on('change', (e) => {
 //   osc1GainNode.gain.value = e.target.value / 100
