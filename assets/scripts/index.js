@@ -4,7 +4,7 @@ const setAPIOrigin = require('../../lib/set-api-origin')
 const config = require('./config')
 // require('./knob.min')
 require('./jquery.knob')
-const ui = require('./ui')
+require('./ui')
 const synth = require('./synth')
 
 $(() => {

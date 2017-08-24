@@ -22,6 +22,12 @@ const freqArray = {
   B: 246.942
 }
 
+// Convert note number to proper note frequency
+// 57 = A4
+const frequencyFromNum = function (note) {
+  return 440 * Math.pow(2, (note - 69) / 12)
+}
+
 // Map keycodes to the note they play
 const keyMap = {
   90: 'C',
