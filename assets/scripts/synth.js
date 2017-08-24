@@ -162,113 +162,59 @@ $(document).on('keyup', e => {
   // console.log('keyup', e.which)
 })
 
-$('#osc1-volume').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 80,
-  height: 80,
-  release (val) { osc1GainNode.gain.value = val / 100 }
-})
+const setOscVolume = (value, osc = 0) => {
+  osc1GainNode.gain.value = value
+}
 
-$('#osc1-waveform').on('change', e => {
-  console.log(e);
-  oscOptions[0].type = e.target.value
-})
+const setOscWaveform = (value, osc = 0) => {
+  oscOptions[osc].type = value
+}
 
-$('#osc1-attack').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 50,
-  height: 50,
-  min: 0,
-  max: 10,
-  step: 0.1,
-  release (val) { oscOptions[0].attack = val }
-})
+const setOscEnvelopeAttack = (value, osc = 0) => {
+  oscOptions[osc].attack = value
+}
 
-$('#osc1-decay').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 50,
-  height: 50,
-  min: 0,
-  max: 10,
-  step: 0.1,
-  release (val) { oscOptions[0].decay = val }
-})
+const setOscEnvelopeDecay = (value, osc = 0) => {
+  oscOptions[osc].decay = value
+}
 
-$('#osc1-release').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 50,
-  height: 50,
-  min: 0,
-  max: 10,
-  step: 0.1,
-  release (val) { oscOptions[0].release = val }
-})
+const setOscEnvelopeSustain = (value, osc = 0) => {
+  oscOptions[osc].sustain = value
+}
 
-$('#osc1-sustain').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 50,
-  height: 50,
-  min: 0,
-  max: 1,
-  step: 0.05,
-  release (val) { oscOptions[0].sustain = val }
-})
+const setOscEnvelopeRelease = (value, osc = 0) => {
+  oscOptions[osc].release = value
+}
 
-$('#filter-attack').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 50,
-  height: 50,
-  min: 0,
-  max: 10,
-  step: 0.1,
-  release (val) { filterOptions.attack = val }
-})
+const setFilterEnvelopeAttack = (value) => {
+  filterOptions.attack = value
+}
 
-$('#filter-decay').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 50,
-  height: 50,
-  min: 0,
-  max: 10,
-  step: 0.1,
-  release (val) { filterOptions.decay = val }
-})
+const setFilterEnvelopeDecay = (value) => {
+  filterOptions.decay = value
+}
 
-$('#filter-release').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 50,
-  height: 50,
-  min: 0,
-  max: 10,
-  step: 0.1,
-  release (val) { filterOptions.release = val }
-})
+const setFilterEnvelopeSustain = (value) => {
+  filterOptions.sustain = value
+}
 
-$('#filter-sustain').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 50,
-  height: 50,
-  min: 0,
-  max: 10000,
-  step: 50,
-  release (val) { filterOptions.sustain = val }
-})
-// $('#osc1-volume').on('change', (e) => {
-//   osc1GainNode.gain.value = e.target.value / 100
-// })
+const setFilterEnvelopeRelease = (value) => {
+  filterOptions.release = value
+}
 
 const init = () => {
 }
 
 module.exports = {
-  init
+  init,
+  setFilterEnvelopeAttack,
+  setFilterEnvelopeDecay,
+  setFilterEnvelopeSustain,
+  setFilterEnvelopeRelease,
+  setOscEnvelopeAttack,
+  setOscEnvelopeDecay,
+  setOscEnvelopeSustain,
+  setOscEnvelopeRelease,
+  setOscWaveform,
+  setOscVolume
 }
