@@ -71,7 +71,9 @@ const oscOptions = [
     attack: 0.1,
     decay: 0.1,
     sustain: 1.0,
-    release: 0.4
+    release: 0.4,
+    detune: 1.0,
+    octave: 1.0
   }
 ]
 
@@ -81,7 +83,7 @@ class Voice {
     this.options = oscOptions[oscId]
 
     this.osc = audioCtx.createOscillator()
-    this.osc.frequency.value = freqArray[note]
+    this.osc.frequency.value = freqArray[note] * this.options.octave * this.options.detune
     this.osc.type = this.options.type
 
     // Gain envelope
@@ -172,6 +174,14 @@ const setOscVolume = (value, osc = 0) => {
   osc1GainNode.gain.value = value
 }
 
+const setOscDetune = (value, osc = 0) => {
+  oscOptions[osc].detune = value
+}
+
+const setOscOctave = (value, osc = 0) => {
+  oscOptions[osc].octave = value
+}
+
 const setOscWaveform = (value, osc = 0) => {
   oscOptions[osc].type = value
 }
@@ -213,14 +223,16 @@ const init = () => {
 
 module.exports = {
   init,
-  setFilterEnvelopeAttack,
-  setFilterEnvelopeDecay,
-  setFilterEnvelopeSustain,
-  setFilterEnvelopeRelease,
+  setOscVolume,
+  setOscDetune,
+  setOscOctave,
+  setOscWaveform,
   setOscEnvelopeAttack,
   setOscEnvelopeDecay,
   setOscEnvelopeSustain,
   setOscEnvelopeRelease,
-  setOscWaveform,
-  setOscVolume
+  setFilterEnvelopeAttack,
+  setFilterEnvelopeDecay,
+  setFilterEnvelopeSustain,
+  setFilterEnvelopeRelease
 }
