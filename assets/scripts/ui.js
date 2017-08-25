@@ -34,13 +34,14 @@ $('#osc1-detune').knob(Object.assign({
   min: -1200,
   max: 1200,
   step: 5,
-  change: val => synth.setOscDetune(2 ** (val / 1200), 0)
+  change: val => synth.setOscDetune(2 ** (val / 1200), 0),
+  release: val => synth.setOscDetune(2 ** (val / 1200), 0)
 }, mediumKnob))
 
 $('#osc1-octave').knob(Object.assign({
   min: -2,
   max: 2,
-  change: val => synth.setOscOctave(2 ** val, 0)
+  release: val => synth.setOscOctave(2 ** val, 0)
 }, mediumKnob))
 
 // Oscillator 1 second set of knobs
