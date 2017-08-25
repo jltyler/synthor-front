@@ -186,6 +186,22 @@ const setOscWaveform = (value, osc = 0) => {
   oscOptions[osc].type = value
 }
 
+const setOscUnison = (value, osc = 0) => {
+  oscOptions[osc].unison = value
+}
+
+const setOscPan = (value, osc = 0) => {
+  oscOptions[osc].pan = value
+}
+
+const setOscTremoloAmp = (value, osc = 0) => {
+  oscOptions[osc].tremAmp = value
+}
+
+const setOscTremoloFreq = (value, osc = 0) => {
+  oscOptions[osc].tremFreq = value
+}
+
 const setOscEnvelopeAttack = (value, osc = 0) => {
   oscOptions[osc].attack = value
 }
@@ -227,6 +243,10 @@ module.exports = {
   setOscDetune,
   setOscOctave,
   setOscWaveform,
+  setOscUnison,
+  setOscPan,
+  setOscTremoloAmp,
+  setOscTremoloFreq,
   setOscEnvelopeAttack,
   setOscEnvelopeDecay,
   setOscEnvelopeSustain,

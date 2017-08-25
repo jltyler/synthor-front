@@ -75,7 +75,7 @@ $('#osc1-trem-freq').knob({
   height: 80,
   min: 0,
   max: 25,
-  change: val => synth.setOscTremoloAmp(val, 0)
+  change: val => synth.setOscTremoloFreq(val, 0)
 })
 
 // Osc1 envelope
