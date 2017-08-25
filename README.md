@@ -11,7 +11,10 @@ As a user, I can play notes with my patch on a visual keyboard or the physical k
 As a user, I can hook up a MIDI controller to play notes and control filter settings
 
 ## Wireframes
-Main: [https://wireframe.cc/xw2anL]
-Osc: [https://wireframe.cc/zUPe1I]
-Filter: [https://wireframe.cc/2uiU0q]
-Load: [https://wireframe.cc/5Dpjpd]
+Main: https://wireframe.cc/xw2anL
+
+Osc: https://wireframe.cc/zUPe1I
+
+Filter: https://wireframe.cc/2uiU0q
+
+Load: https://wireframe.cc/5Dpjpd
