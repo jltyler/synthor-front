@@ -86,9 +86,14 @@ class Voice {
     const now = audioCtx.currentTime
     this.options = oscOptions[oscId]
 
+    // Oscillator and settings
     this.osc = audioCtx.createOscillator()
     this.osc.frequency.value = freqArray[note] * this.options.octave * this.options.detune
     this.osc.type = this.options.type
+
+    // Pan
+    this.pan = audioCtx.createStereoPanner()
+    this.pan.pan.setValueAtTime(this.options.pan, now)
 
     // Gain envelope
     this.env = audioCtx.createGain()
@@ -106,7 +111,8 @@ class Voice {
     // Connect the nodes and start
     this.osc.connect(this.fenv)
     this.fenv.connect(this.env)
-    this.env.connect(compressor)
+    this.env.connect(this.pan)
+    this.pan.connect(compressor)
     this.osc.start()
   }
 

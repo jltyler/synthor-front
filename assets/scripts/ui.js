@@ -3,7 +3,10 @@ const synth = require('./synth')
 // Settings that apply to all knobs
 const standardKnob = {
   angleArc: 300,
-  angleOffset: -150
+  angleOffset: -150,
+  fgColor: 'rgb(90, 0, 255)',
+  inputColor: 'rgb(180, 90, 255)',
+  bgColor: '#111'
 }
 
 // Standardized sizes for knobs
