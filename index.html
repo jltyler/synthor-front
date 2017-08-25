@@ -20,55 +20,66 @@
       </nav>
       <div class="row">
         <div class="col-md-3 osc1">
-          <h1>Osc1</h1>
-          <h3>Type</h3>
-          <select id="osc1-waveform">
-            <option value="sine">Sine</option>
-            <option value="sawtooth" selected>Sawtooth</option>
-            <option value="square">Square</option>
-            <option value="triangle">Triangle</option>
-          </select>
-          <h3>Volume</h3>
-          <input type="text" id="osc1-volume" value="50">
-          <h3>Volume Envelope</h3>
-          <input type="text" id="osc1-attack" value="0.1">
-          <input type="text" id="osc1-decay" value="0.1">
-          <input type="text" id="osc1-sustain" value="1.0">
-          <input type="text" id="osc1-release" value="0.3">
+          <div class="text-center">
+            <h1>Osc1</h1>
+            <div class="osc1-octave-div">
+              <h4>Octave</h4>
+              <input type="text" id="osc1-octave" value="0">
+            </div>
+            <div class="osc1-volume-div">
+              <h3>Volume</h3>
+              <input type="text" id="osc1-volume" value="50">
+            </div>
+            <div class="osc1-detune-div">
+              <h4>Detune</h4>
+              <input type="text" id="osc1-detune" value="0">
+            </div>
+          </div>
+          <div class="osc1-settings-div">
+            <div class="osc1-waveform-div text-center">
+              <h3>Type</h3>
+              <select id="osc1-waveform">
+                <option value="sine">Sine</option>
+                <option value="sawtooth" selected>Sawtooth</option>
+                <option value="square">Square</option>
+                <option value="triangle">Triangle</option>
+              </select>
+            </div>
+            <div class="text-center">
+              <div class="osc1-unison-div">
+                <h4>Unison</h4>
+                <input type="text" id="osc1-unison" value="0">
+              </div>
+              <div class="osc1-pan-div">
+                <h4>Panning</h4>
+                <input type="text" id="osc1-pan" value="0">
+              </div>
+            </div>
+          </div>
+          <div class="osc1-tremolo-div text-center">
+            <h3>Tremolo</h3>
+            <div class="osc1-trem-amp-div">
+              <h4>Amplitude</h4>
+              <input type="text" id="osc1-trem-amp" value="0">
+            </div>
+            <div class="osc1-trem-freq-div">
+              <h4>Frequency</h4>
+              <input type="text" id="osc1-trem-freq" value="0">
+            </div>
+          </div>
+          <div class="osc1-envelope-div text-center">
+            <h3>Envelope</h3>
+            <input type="text" id="osc1-attack" value="0.1">
+            <input type="text" id="osc1-decay" value="0.1">
+            <input type="text" id="osc1-sustain" value="1.0">
+            <input type="text" id="osc1-release" value="0.3">
+          </div>
         </div>
         <div class="col-md-3 osc2">
           <h1>Osc2</h1>
-          <h3>Type</h3>
-          <select id="osc2-waveform">
-            <option value="sine">Sine</option>
-            <option value="sawtooth" selected>Sawtooth</option>
-            <option value="square">Square</option>
-            <option value="triangle">Triangle</option>
-          </select>
-          <h3>Volume</h3>
-          <input type="text" id="osc2-volume" value="50">
-          <h3>Volume Envelope</h3>
-          <input type="text" id="osc2-attack" value="0.1">
-          <input type="text" id="osc2-decay" value="0.1">
-          <input type="text" id="osc2-sustain" value="1.0">
-          <input type="text" id="osc2-release" value="0.3">
         </div>
         <div class="col-md-3 osc3">
           <h1>Osc3</h1>
-          <h3>Type</h3>
-          <select id="osc3-waveform">
-            <option value="sine">Sine</option>
-            <option value="sawtooth" selected>Sawtooth</option>
-            <option value="square">Square</option>
-            <option value="triangle">Triangle</option>
-          </select>
-          <h3>Volume</h3>
-          <input type="text" id="osc3-volume" value="50">
-          <h3>Volume Envelope</h3>
-          <input type="text" id="osc3-attack" value="0.1">
-          <input type="text" id="osc3-decay" value="0.1">
-          <input type="text" id="osc3-sustain" value="1.0">
-          <input type="text" id="osc3-release" value="0.3">
         </div>
         <div class="col-md-3 filter">
           <h1>Filter</h1>
