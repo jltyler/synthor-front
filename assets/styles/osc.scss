@@ -1,0 +1,25 @@
+h1,
+h3,
+h4 {
+  margin: .3em;
+}
+
+.osc1-volume-div,
+.osc1-octave-div,
+.osc1-detune-div,
+.osc1-unison-div,
+.osc1-pan-div,
+.osc1-trem-amp-div,
+.osc1-trem-freq-div
+{
+  display: inline-block;
+  margin-left: 0.3em;
+  margin-right: 0.3em;
+  border: 1px solid white;
+  text-align: center;
+}
+
+.osc1-octave-div,
+.osc1-detune-div {
+  margin-top: 1em;
+}
