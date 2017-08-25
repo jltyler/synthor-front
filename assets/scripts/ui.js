@@ -1,10 +1,12 @@
 const synth = require('./synth')
 
+// Settings that apply to all knobs
 const standardKnob = {
   angleArc: 300,
   angleOffset: -150
 }
 
+// Standardized sizes for knobs
 const bigKnob = Object.assign({
   width: 80,
   height: 80
@@ -21,34 +23,22 @@ const smallKnob = Object.assign({
 }, standardKnob)
 
 // Oscillator 1 main knobs
-$('#osc1-volume').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 80,
-  height: 80,
+$('#osc1-volume').knob(Object.assign({
   change: val => synth.setOscVolume(val / 100, 0)
-})
+}, bigKnob))
 
-$('#osc1-detune').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 60,
-  height: 60,
+$('#osc1-detune').knob(Object.assign({
   min: -1200,
   max: 1200,
   step: 5,
   change: val => synth.setOscDetune(2 ** (val / 1200), 0)
-})
+}, mediumKnob))
 
-$('#osc1-octave').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 60,
-  height: 60,
+$('#osc1-octave').knob(Object.assign({
   min: -2,
   max: 2,
   change: val => synth.setOscOctave(2 ** val, 0)
-})
+}, mediumKnob))
 
 // Oscillator 1 second set of knobs
 $('#osc1-waveform').on('change', e => {
@@ -56,135 +46,76 @@ $('#osc1-waveform').on('change', e => {
   synth.setOscWaveform(e.target.value, 0)
 })
 
-$('#osc1-unison').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 80,
-  height: 80,
+$('#osc1-unison').knob(Object.assign({
   min: 1,
   max: 4,
   change: val => synth.setOscUnison(val, 0)
-})
+}, bigKnob))
 
-$('#osc1-pan').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 80,
-  height: 80,
+$('#osc1-pan').knob(Object.assign({
   min: -1.0,
   max: 1.0,
-  steo: 0.1,
+  step: 0.05,
   change: val => synth.setOscPan(val, 0)
-})
+}, bigKnob))
 
 // Osc1 tremolo
-$('#osc1-trem-amp').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 80,
-  height: 80,
+$('#osc1-trem-amp').knob(Object.assign({
   min: 0,
   max: 25,
   change: val => synth.setOscTremoloAmp(val, 0)
-})
+}, bigKnob))
 
-$('#osc1-trem-freq').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 80,
-  height: 80,
+$('#osc1-trem-freq').knob(Object.assign({
   min: 0,
   max: 25,
   change: val => synth.setOscTremoloFreq(val, 0)
-})
+}, bigKnob))
+
+// Standard Attack Decay Release knob
+const adrKnob = Object.assign({
+  min: 0,
+  max: 10,
+  step: 0.1
+}, smallKnob)
 
 // Osc1 envelope
-$('#osc1-attack').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 50,
-  height: 50,
-  min: 0,
-  max: 10,
-  step: 0.1,
+$('#osc1-attack').knob(Object.assign({
   change: val => synth.setOscEnvelopeAttack(val, 0)
-})
+}, adrKnob))
 
-$('#osc1-decay').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 50,
-  height: 50,
-  min: 0,
-  max: 10,
-  step: 0.1,
+$('#osc1-decay').knob(Object.assign({
   change: val => synth.setOscEnvelopeDecay(val, 0)
-})
+}, adrKnob))
 
-$('#osc1-release').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 50,
-  height: 50,
-  min: 0,
-  max: 10,
-  step: 0.1,
+$('#osc1-release').knob(Object.assign({
   change: val => synth.setOscEnvelopeRelease(val, 0)
-})
+}, adrKnob))
 
-$('#osc1-sustain').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 50,
-  height: 50,
+$('#osc1-sustain').knob(Object.assign({
   min: 0,
   max: 1,
   step: 0.05,
   change: val => synth.setOscEnvelopeSustain(val, 0)
-})
+}, smallKnob))
 
 // Filter knobs
 // Envelope
-$('#filter-attack').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 50,
-  height: 50,
-  min: 0,
-  max: 10,
-  step: 0.1,
+$('#filter-attack').knob(Object.assign({
   change: synth.setFilterEnvelopeAttack
-})
+}, adrKnob))
 
-$('#filter-decay').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 50,
-  height: 50,
-  min: 0,
-  max: 10,
-  step: 0.1,
+$('#filter-decay').knob(Object.assign({
   change: synth.setFilterEnvelopeDecay
-})
+}, adrKnob))
 
-$('#filter-release').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 50,
-  height: 50,
-  min: 0,
-  max: 10,
-  step: 0.1,
+$('#filter-release').knob(Object.assign({
   change: synth.setFilterEnvelopeRelease
-})
+}, adrKnob))
 
-$('#filter-sustain').knob({
-  angleArc: 300,
-  angleOffset: -150,
-  width: 50,
-  height: 50,
+$('#filter-sustain').knob(Object.assign({
   min: 0,
   max: 10000,
   step: 50,
   change: synth.setFilterEnvelopeSustain
-})
+}, smallKnob))
