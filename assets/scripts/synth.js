@@ -73,7 +73,11 @@ const oscOptions = [
     sustain: 1.0,
     release: 0.4,
     detune: 1.0,
-    octave: 1.0
+    octave: 1.0,
+    unison: 1,
+    pan: 0,
+    tremAmp: 0,
+    tremFreq: 0
   }
 ]
 
