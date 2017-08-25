@@ -1,5 +1,25 @@
 const synth = require('./synth')
 
+const standardKnob = {
+  angleArc: 300,
+  angleOffset: -150
+}
+
+const bigKnob = Object.assign({
+  width: 80,
+  height: 80
+}, standardKnob)
+
+const mediumKnob = Object.assign({
+  width: 60,
+  height: 60
+}, standardKnob)
+
+const smallKnob = Object.assign({
+  width: 50,
+  height: 50
+}, standardKnob)
+
 // Oscillator 1 main knobs
 $('#osc1-volume').knob({
   angleArc: 300,
