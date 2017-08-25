@@ -134,6 +134,7 @@ class Voice {
       this.osc.disconnect()
       this.fenv.disconnect()
       this.env.disconnect()
+      this.pan.disconnect()
     }, Math.max(this.options.release, filterOptions.release) * 1000)
   }
 }
