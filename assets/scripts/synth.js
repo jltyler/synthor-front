@@ -91,6 +91,15 @@ class Voice {
     this.osc.frequency.value = freqArray[note] * this.options.octave * this.options.detune
     this.osc.type = this.options.type
 
+    // Tremolo
+    this.tremOsc = audioCtx.createOscillator()
+    this.tremOsc.frequency.value = this.options.tremFreq
+    this.tremGain = audioCtx.createGain()
+    this.tremGain.gain.value = this.options.tremAmp
+    this.tremOsc.connect(this.tremGain)
+    this.tremGain.connect(this.osc.frequency)
+    this.tremOsc.start()
+
     // Pan
     this.pan = audioCtx.createStereoPanner()
     this.pan.pan.setValueAtTime(this.options.pan, now)
