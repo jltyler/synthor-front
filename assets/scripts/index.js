@@ -4,13 +4,15 @@ const setAPIOrigin = require('../../lib/set-api-origin')
 const config = require('./config')
 // require('./knob.min')
 require('./third/jquery.knob')
-require('./synth/ui')
+require('./synth/knobify')
 const synth = require('./synth/synth')
 const authEvents = require('./auth/events')
+const synthEvents = require('./synth/events')
 
 $(() => {
   setAPIOrigin(location, config)
   authEvents.attachHandlers()
+  synthEvents.attachHandlers()
   synth.init()
 })
 
