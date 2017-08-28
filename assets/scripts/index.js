@@ -6,9 +6,11 @@ const config = require('./config')
 require('./third/jquery.knob')
 require('./synth/ui')
 const synth = require('./synth/synth')
+const authEvents = require('./auth/events')
 
 $(() => {
   setAPIOrigin(location, config)
+  authEvents.attachHandlers()
   synth.init()
 })
 

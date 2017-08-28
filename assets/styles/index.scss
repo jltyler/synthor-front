@@ -8,6 +8,11 @@ body {
   color: #eee;
 }
 
+.nav form,
+.nav ul {
+  display: inline-block;
+}
+
 input,
 option,
 select {

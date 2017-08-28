@@ -13,7 +13,7 @@ const signUp = (data) => {
 }
 
 // ajax request for user to sign in
-const signIn = (data) => {
+const logIn = (data) => {
   return $.ajax({
     url: config.apiOrigin + '/sign-in',
     method: 'POST',
@@ -22,7 +22,7 @@ const signIn = (data) => {
 }
 
 // ajax request to change a user's password
-const changePassword = (data) => {
+const changepwd = (data) => {
   return $.ajax({
     url: config.apiOrigin + '/change-password/' + store.user.id,
     method: 'PATCH',
@@ -46,7 +46,7 @@ const signOut = () => {
 
 module.exports = {
   signUp,
-  signIn,
-  changePassword,
+  logIn,
+  changepwd,
   signOut
 }
