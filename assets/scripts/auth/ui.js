@@ -1,4 +1,5 @@
 const store = require('../store')
+const synthUi = require('../synth/ui')
 
 // Helper funcs so I can type less
 const hide = b => b.addClass('hidden')
@@ -20,8 +21,7 @@ const showChangepwdButton = $('#show-changepwd-button')
 const cancelChangepwdButton = $('#cancel-changepwd-button')
 
 const signUpSuccess = res => {
-  console.log('XX-=signUpSuccess=-XX')
-  hide(signupButton)
+  console.log('signUpSuccess')
 }
 const signUpError = res => {
   console.log('signUpError')
@@ -29,7 +29,7 @@ const signUpError = res => {
 }
 
 const logInSuccess = res => {
-  console.log('XX-=logInSuccess=-XX')
+  console.log('logInSuccess')
   console.log(res)
   store.user = res.user
   console.log('res.user:', res.user)
@@ -38,6 +38,7 @@ const logInSuccess = res => {
   hide(credentialsForm)
   show(signoutButton)
   show(showChangepwdButton)
+  show($('#synth-auth-div'))
 }
 const logInError = res => {
   console.log('logInError')
@@ -47,11 +48,13 @@ const logInError = res => {
 const signOutSuccess = res => {
   console.log('signOutSuccess')
   store.user = null
-  hide(signoutButton)
-  hide(showChangepwdButton)
   show(signupButton)
   show(loginButton)
   show(credentialsForm)
+  hide(signoutButton)
+  hide(showChangepwdButton)
+  hide($('#synth-auth-div'))
+  synthUi.resetPatchSaveArea()
 }
 const signOutError = res => {
   console.log('signOutError')

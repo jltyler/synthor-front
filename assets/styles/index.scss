@@ -25,3 +25,25 @@ select {
     display: inline-block;
   }
 }
+
+.synth-auth-div {
+  display: inline-block;
+}
+
+.patches-bar {
+  text-align: center;
+  background-color: #222;
+  border: 1px solid #aaa;
+  height: 100%;
+  width: 320px;
+  position: fixed;
+  left: -320px;
+  top: 0;
+  box-sizing: border-box;
+  z-index: 10;
+  transition: left 0.3s;
+}
+
+.patches-popout {
+  left: 0;
+}
