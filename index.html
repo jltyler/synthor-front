@@ -13,16 +13,29 @@
     </head>
     <body class="container-fluid">
       <nav class="row nav">
-        <div class="col-md-3">
-          <form id="credentials-form">
-            <input type="text" placeholder="Username" name="credentials[email]" value="a">
-            <input type="password" placeholder="Password"  name="credentials[password]" value="a">
-          </form>
-          <form id="changepwd-form" class="hidden">
-            <input type="password" placeholder="Old Password" name="passwords[old]">
-            <input type="password" placeholder="New Password"  name="passwords[new]">
-          </form>
+        <div class="col-md-2 title">
+          <h2>Synthor</h2>
         </div>
+        <div class="col-md-5 patch-info-div">
+          <!-- Show the save form button -->
+          <button id="show-save-form-button" class="btn btn-info">Save New</button>
+          <!-- Actual save button -->
+          <button id="save-new-button" class="btn btn-success hidden">Save</button>
+          <!-- Display patch name -->
+          <span id="patch-name-display" class="patch-name-display">New Patch</span>
+          <!-- Confirm text -->
+          <span id="confirm-patch-action-display" class="confirm-patch-action-display hidden">Are you sure?</span>
+          <!-- Input new patch name -->
+          <input type="text" id="patch-name-input" placeholder="Patch Name" class="hidden">
+          <!-- Cancel new save button -->
+          <button id="cancel-save-new-button" class="btn btn-danger hidden">Cancel</button>
+          <!-- Overwrite current patch -->
+          <button id="save-update-button" class="btn btn-primary hidden">Save (overwrite)</button>
+          <!-- Cancel and confirm for save update -->
+          <button id="confirm-save-update-button" class="btn btn-success hidden">Confirm</button>
+          <button id="cancel-save-update-button" class="btn btn-danger hidden">Cancel</button>
+        </div>
+        <!-- Auth Buttons -->
         <div class="col-md-2">
           <ul>
             <li><button id="login-button" type="button"class="btn btn-primary btn-sm">Log In </button></li>
@@ -33,10 +46,20 @@
             <li><button id="cancel-changepwd-button" type="button"class="btn btn-danger btn-sm hidden">Cancel</button></li>
           </ul>
         </div>
-        <div class="col-md-3 title">
-          <h2>Synthor</h2>
+        <!-- Auth Forms -->
+        <div class="col-md-3">
+          <form id="credentials-form">
+            <input type="text" placeholder="Username" name="credentials[email]" value="a">
+            <input type="password" placeholder="Password"  name="credentials[password]" value="a">
+          </form>
+          <form id="changepwd-form" class="hidden">
+            <input type="password" placeholder="Old Password" name="passwords[old]">
+            <input type="password" placeholder="New Password"  name="passwords[new]">
+          </form>
         </div>
       </nav>
+      <!-- END NAV -->
+      <!-- ACTUAL SYNTHESIZER CONTROLS -->
       <div class="row">
         <div class="col-md-3 osc1">
           <div class="text-center">
@@ -100,6 +123,7 @@
         <div class="col-md-3 osc3">
           <h1>Osc3</h1>
         </div>
+        <!-- FILTER CONTROLS -->
         <div class="col-md-3 filter">
           <h1>Filter</h1>
           <h3>Envelope</h3>

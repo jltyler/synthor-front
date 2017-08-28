@@ -23,7 +23,7 @@ const onUpdatePatch = e => {
   const data = getPatchInfo(true)
   console.log(data)
   if (store.user && store.patch) {
-    delete data.name
+    delete data.patch.name
     api.updatePatch(data)
       .then(ui.updatePatchSuccess)
       .catch(ui.updatePatchError)
@@ -37,7 +37,12 @@ const onUpdatePatch = e => {
 
 const attachHandlers = () => {
   $('#save-new-button').on('click', onCreatePatch)
-  $('#save-update-button').on('click', onUpdatePatch)
+  $('#confirm-save-update-button').on('click', onUpdatePatch)
+
+  $('#cancel-save-update-button').on('click', ui.hideUpdateConfirm)
+  $('#save-update-button').on('click', ui.showUpdateConfirm)
+  $('#show-save-form-button').on('click', ui.showSaveForm)
+  $('#cancel-save-new-button').on('click', ui.hideSaveForm)
 }
 
 module.exports = {
