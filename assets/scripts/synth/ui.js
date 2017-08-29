@@ -1,5 +1,7 @@
 const store = require('../store')
 const api = require('./api')
+const QwertyHancock = require('qwerty-hancock')
+const synth = require('./synth')
 
 // Helpers and templates
 const patchTemplate = require('../templates/patch.hbs')
@@ -211,6 +213,27 @@ const deletePatchSuccess = res => {
 const deletePatchError = res => {
   console.log('deletePatchError')
   console.log(res)
+}
+
+const keyboard = new QwertyHancock({
+  id: 'virtual-keyboard',
+  width: 750,
+  height: 180,
+  octaves: 2,
+  startNote: 'C3',
+  whiteNotesColour: 'white',
+  blackNotesColour: 'black',
+  hoverColour: '#9900ff'
+})
+
+keyboard.keyDown = function (note, frequency) {
+  console.log('kbnotepress:', note, '|', frequency)
+  synth.playNote(note, frequency)
+}
+
+keyboard.keyUp = function (note, frequency) {
+  console.log('kbnoterelease:', note, '|', frequency)
+  synth.stopNote(note, frequency)
 }
 
 module.exports = {

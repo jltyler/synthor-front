@@ -54,6 +54,12 @@ select {
   background-color: lime;
   color: #000;
 }
+
+// Fix misaligned keys on the keyboard
+.virtual-keyboard * {
+  box-sizing: content-box;
+}
+
 // Don't want them ugly LIGHT THEMES BLEARGH
 .modal-content {
   text-align: center;
@@ -62,10 +68,10 @@ select {
 }
 
 .close,
-.close:hover
- {
+.close:hover {
   color: #eee;
 }
+
 // .patches-bar {
 //   text-align: center;
 //   background-color: #222;

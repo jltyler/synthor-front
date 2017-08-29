@@ -1,49 +1,6 @@
 // Main context
 const audioCtx = new window.AudioContext()
 
-// Pressing and holding a key will repeaet it so we need to use this array to
-// prevent it from repeating
-const keyArray = new Array(255, false)
-
-// Frequency array to use for notes (I should just calculate them later)
-const freqArray = {
-  octave: 3,
-  C: 130.813,
-  CS: 138.591,
-  D: 146.832,
-  DS: 155.563,
-  E: 164.814,
-  F: 174.614,
-  FS: 184.997,
-  G: 195.998,
-  GS: 207.652,
-  A: 220.000,
-  AS: 233.082,
-  B: 246.942
-}
-
-// Convert note number to proper note frequency
-// 57 = A4
-const frequencyFromNum = function (note) {
-  return 440 * Math.pow(2, (note - 69) / 12)
-}
-
-// Map keycodes to the note they play
-const keyMap = {
-  90: 'C',
-  83: 'CS',
-  88: 'D',
-  68: 'DS',
-  67: 'E',
-  86: 'F',
-  71: 'FS',
-  66: 'G',
-  72: 'GS',
-  78: 'A',
-  74: 'AS',
-  77: 'B'
-}
-
 // Ends up being objects of arrays so I can have multiple of the same note playing
 const osc1 = {}
 
@@ -85,13 +42,13 @@ const oscOptions = [
 ]
 
 class Voice {
-  constructor (note, oscId = 0) {
+  constructor (frequency, oscId = 0) {
     const now = audioCtx.currentTime
     this.options = oscOptions[oscId]
 
     // Oscillator and settings
     this.osc = audioCtx.createOscillator()
-    this.osc.frequency.value = freqArray[note] * this.options.octave * this.options.detune
+    this.osc.frequency.value = frequency * this.options.octave * this.options.detune
     this.osc.type = this.options.type
 
     // Osc Tremolo
@@ -167,46 +124,21 @@ class Voice {
 }
 
 // Plays a note
-const playNote = (note, octave = 3) => {
-  // console.log('playNote(', note, ')');
-  // Only play on valid note keys
-  if (note === undefined) {
-    return
-  }
+const playNote = (note, frequency) => {
   if (!osc1[note]) {
-    osc1[note] = [new Voice(note, 0)]
+    osc1[note] = [new Voice(frequency, 0)]
   } else {
-    osc1[note].push(new Voice(note, 0))
+    osc1[note].push(new Voice(frequency, 0))
   }
 }
 
-const stopNote = (note, octave = 3) => {
-  // console.log('stopNote(', note, ')');
-  if (note === undefined) {
-    return
-  }
+// Release a note
+const stopNote = (note, frequency) => {
   if (osc1[note].length > 0) {
-    // console.log('release', note);
     const voice = osc1[note].shift()
     voice.release()
   }
 }
-
-// Key pressed event
-$(document).on('keydown', e => {
-  if (!keyArray[e.which]) {
-    playNote(keyMap[e.which.toString()])
-    keyArray[e.which] = true
-    // console.log('keydown', e.which)
-  }
-})
-
-// Key released event
-$(document).on('keyup', e => {
-  stopNote(keyMap[e.which.toString()])
-  keyArray[e.which] = false
-  // console.log('keyup', e.which)
-})
 
 const setOscVolume = (value, osc = 0) => {
   osc1GainNode.gain.value = value
@@ -317,5 +249,7 @@ module.exports = {
   setFilterEnvelopeAttack,
   setFilterEnvelopeDecay,
   setFilterEnvelopeSustain,
-  setFilterEnvelopeRelease
+  setFilterEnvelopeRelease,
+  playNote,
+  stopNote,
 }
