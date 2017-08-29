@@ -137,10 +137,12 @@ const populatePatchesBar = (patches) => {
     if (store.user) {
       api.showPatch(id)
         .then(showPatchSuccess)
+        .then(() => $('#patches-bar').modal('hide'))
         .catch(showPatchError)
     } else {
       api.showPatchPublic(id)
         .then(showPatchSuccess)
+        .then(() => $('#patches-bar').modal('hide'))
         .catch(showPatchError)
     }
   })
@@ -181,7 +183,7 @@ const indexPatchSuccess = res => {
   console.log('indexPatchSuccess')
   console.log(res)
   populatePatchesBar(res.patches)
-  showPatchesBar()
+  // showPatchesBar()
 }
 const indexPatchError = res => {
   console.log('indexPatchError')
@@ -191,7 +193,7 @@ const indexPatchError = res => {
 const showPatchSuccess = res => {
   console.log('showPatchSuccess')
   console.log(res)
-  hidePatchesBar()
+  // hidePatchesBar()
   store.patch = res.patch
   loadPatch()
 }

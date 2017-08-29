@@ -112,6 +112,29 @@ $('#osc1-sustain').knob(Object.assign({
 }, smallKnob))
 
 // Filter knobs
+// Filter main knobs
+$('#filter-freq').knob(Object.assign({
+  min: 0,
+  max: 15000,
+  step: 100,
+  change: val => synth.setFilterFreq(val),
+  release: val => synth.setFilterFreq(val)
+}, bigKnob))
+
+$('#filter-Q').knob(Object.assign({
+  min: 0,
+  max: 40,
+  change: val => synth.setFilterQ(val),
+  release: val => synth.setFilterQ(val)
+}, mediumKnob))
+
+$('#filter-env').knob(Object.assign({
+  min: 0,
+  max: 15000,
+  step: 100,
+  release: val => synth.setFilterEnv(val)
+}, mediumKnob))
+
 // Envelope
 $('#filter-attack').knob(Object.assign({
   change: synth.setFilterEnvelopeAttack,
@@ -130,8 +153,47 @@ $('#filter-release').knob(Object.assign({
 
 $('#filter-sustain').knob(Object.assign({
   min: 0,
-  max: 10000,
-  step: 50,
+  max: 1.0,
+  step: 0.05,
   change: synth.setFilterEnvelopeSustain,
   release: synth.setFilterEnvelopeSustain,
 }, smallKnob))
+
+// Filter tremolo
+$('#filter-trem-amp').knob(Object.assign({
+  min: 0,
+  max: 2000,
+  step: 50,
+  change: val => synth.setFilterTremoloAmp(val, 0),
+  release: val => synth.setFilterTremoloAmp(val, 0),
+}, bigKnob))
+
+$('#filter-trem-freq').knob(Object.assign({
+  min: 0,
+  max: 25,
+  change: val => synth.setFilterTremoloFreq(val, 0),
+  release: val => synth.setFilterTremoloFreq(val, 0),
+}, bigKnob))
+
+// Trigger change so we set the values to whatever is first displayed
+$('#osc1-volume').trigger('change')
+$('#osc1-detune').trigger('change')
+$('#osc1-octave').trigger('change')
+$('#osc1-waveform').trigger('change')
+$('#osc1-unison').trigger('change')
+$('#osc1-pan').trigger('change')
+$('#osc1-trem-amp').trigger('change')
+$('#osc1-trem-freq').trigger('change')
+$('#osc1-attack').trigger('change')
+$('#osc1-decay').trigger('change')
+$('#osc1-release').trigger('change')
+$('#osc1-sustain').trigger('change')
+$('#filter-freq').trigger('change')
+$('#filter-Q').trigger('change')
+$('#filter-env').trigger('change')
+$('#filter-attack').trigger('change')
+$('#filter-decay').trigger('change')
+$('#filter-release').trigger('change')
+$('#filter-sustain').trigger('change')
+$('#filter-trem-amp').trigger('change')
+$('#filter-trem-freq').trigger('change')

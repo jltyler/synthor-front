@@ -30,20 +30,108 @@ select {
   display: inline-block;
 }
 
-.patches-bar {
-  text-align: center;
-  background-color: #222;
-  border: 1px solid #aaa;
-  height: 100%;
-  width: 320px;
-  position: fixed;
-  left: -320px;
-  top: 0;
-  box-sizing: border-box;
-  z-index: 10;
-  transition: left 0.3s;
+.patch-item {
+  color: #afa;
+  padding: 8px;
+  border: 2px solid #afa;
+  border-radius: 10px;
+  font-size: 20px;
+  margin-bottom: 4px;
 }
 
-.patches-popout {
+.patch-item > span {
+  display: inline-block;
+  width: 100%;
+}
+
+.btn.load-patch-button {
+  background-color: #000;
+  border: 1px solid lime;
+  transition: background-color .3s, color .3s;
+}
+
+.btn.load-patch-button:hover {
+  background-color: lime;
+  color: #000;
+}
+// Don't want them ugly LIGHT THEMES BLEARGH
+.modal-content {
+  text-align: center;
+  background-color: #222;
+  color: #eee;
+}
+
+.close,
+.close:hover
+ {
+  color: #eee;
+}
+// .patches-bar {
+//   text-align: center;
+//   background-color: #222;
+//   border: 1px solid #aaa;
+//   height: 100%;
+//   width: 320px;
+//   position: fixed;
+//   left: -320px;
+//   top: 0;
+//   box-sizing: border-box;
+//   z-index: 10;
+//   transition: left 0.3s;
+// }
+//
+// .patches-popout {
+//   left: 0;
+// }
+
+/**************************
+*  Left and right modals  *
+**************************/
+.modal.left .modal-dialog,
+.modal.right .modal-dialog {
+  position: fixed;
+  margin: auto;
+  width: 320px;
+  height: 100%;
+  -webkit-transform: translate3d(0%, 0, 0);
+      -ms-transform: translate3d(0%, 0, 0);
+       -o-transform: translate3d(0%, 0, 0);
+          transform: translate3d(0%, 0, 0);
+}
+
+.modal.left .modal-content,
+.modal.right .modal-content {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.modal.left .modal-body,
+.modal.right .modal-body {
+  padding: 15px 15px 80px;
+}
+
+/*Left*/
+.modal.left.fade .modal-dialog{
+  left: -320px;
+  -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+     -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+       -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+          transition: opacity 0.3s linear, left 0.3s ease-out;
+}
+
+.modal.left.fade.in .modal-dialog{
   left: 0;
+}
+
+/*Right*/
+.modal.right.fade .modal-dialog {
+  right: -320px;
+  -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+     -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+       -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+          transition: opacity 0.3s linear, right 0.3s ease-out;
+}
+
+.modal.right.fade.in .modal-dialog {
+  right: 0;
 }

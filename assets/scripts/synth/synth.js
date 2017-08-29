@@ -57,12 +57,15 @@ const compressor = audioCtx.createDynamicsCompressor()
 compressor.connect(osc1GainNode)
 
 const filterOptions = {
+  freq: 12000,
+  q: 10,
+  env: 0,
+  tremAmp: 0,
+  tremFreq: 0,
   attack: 0.1,
   decay: 0.1,
   sustain: 8000,
   release: 0.4,
-  peak: 12000,
-  q: 10
 }
 
 const oscOptions = [
@@ -91,7 +94,7 @@ class Voice {
     this.osc.frequency.value = freqArray[note] * this.options.octave * this.options.detune
     this.osc.type = this.options.type
 
-    // Tremolo
+    // Osc Tremolo
     this.tremOsc = audioCtx.createOscillator()
     this.tremOsc.frequency.value = this.options.tremFreq
     this.tremGain = audioCtx.createGain()
@@ -113,9 +116,18 @@ class Voice {
     // Filter envelope
     this.fenv = audioCtx.createBiquadFilter()
     this.fenv.Q.setValueAtTime(filterOptions.q, now)
-    this.fenv.frequency.setValueAtTime(0, now)
-    this.fenv.frequency.linearRampToValueAtTime(filterOptions.peak, now + filterOptions.attack)
-    this.fenv.frequency.linearRampToValueAtTime(filterOptions.sustain, now + filterOptions.attack + filterOptions.decay)
+    this.fenv.frequency.setValueAtTime(filterOptions.freq, now)
+    this.fenv.frequency.linearRampToValueAtTime(filterOptions.freq + filterOptions.env, now + filterOptions.attack)
+    this.fenv.frequency.linearRampToValueAtTime(filterOptions.freq + filterOptions.sustain * filterOptions.env, now + filterOptions.attack + filterOptions.decay)
+
+    // Filter Tremolo
+    this.filterTremOsc = audioCtx.createOscillator()
+    this.filterTremOsc.frequency.value = filterOptions.tremFreq
+    this.filterTremGain = audioCtx.createGain()
+    this.filterTremGain.gain.value = filterOptions.tremAmp
+    this.filterTremOsc.connect(this.filterTremGain)
+    this.filterTremGain.connect(this.fenv.frequency)
+    this.filterTremOsc.start()
 
     // Connect the nodes and start
     this.osc.connect(this.fenv)
@@ -135,7 +147,7 @@ class Voice {
 
     this.fenv.frequency.cancelScheduledValues(now)
     this.fenv.frequency.setValueAtTime(this.fenv.frequency.value, now)
-    this.fenv.frequency.linearRampToValueAtTime(0.0, now + filterOptions.release)
+    this.fenv.frequency.linearRampToValueAtTime(filterOptions.freq, now + filterOptions.release)
 
     // Once release is finished, we stop the oscillator and remove connections
     setTimeout(() => {
@@ -144,6 +156,12 @@ class Voice {
       this.fenv.disconnect()
       this.env.disconnect()
       this.pan.disconnect()
+      this.tremOsc.stop()
+      this.filterTremOsc.stop()
+      this.tremOsc.disconnect()
+      this.tremGain.disconnect()
+      this.filterTremOsc.disconnect()
+      this.filterTremGain.disconnect()
     }, Math.max(this.options.release, filterOptions.release) * 1000)
   }
 }
@@ -238,6 +256,26 @@ const setOscEnvelopeRelease = (value, osc = 0) => {
   oscOptions[osc].release = value
 }
 
+const setFilterFreq = value => {
+  filterOptions.freq = value
+}
+
+const setFilterQ = value => {
+  filterOptions.q = value
+}
+
+const setFilterEnv = value => {
+  filterOptions.env = value
+}
+
+const setFilterTremoloAmp = value => {
+  filterOptions.tremAmp = value
+}
+
+const setFilterTremoloFreq = value => {
+  filterOptions.tremFreq = value
+}
+
 const setFilterEnvelopeAttack = (value) => {
   filterOptions.attack = value
 }
@@ -271,6 +309,11 @@ module.exports = {
   setOscEnvelopeDecay,
   setOscEnvelopeSustain,
   setOscEnvelopeRelease,
+  setFilterFreq,
+  setFilterQ,
+  setFilterEnv,
+  setFilterTremoloAmp,
+  setFilterTremoloFreq,
   setFilterEnvelopeAttack,
   setFilterEnvelopeDecay,
   setFilterEnvelopeSustain,

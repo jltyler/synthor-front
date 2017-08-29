@@ -50,7 +50,7 @@ const onDeletePatch = e => {
 }
 
 const onIndexPatch = e => {
-  e.preventDefault()
+  // e.preventDefault()
   if (store.user) {
     api.indexPatch()
       .then(ui.indexPatchSuccess)
@@ -65,7 +65,8 @@ const onIndexPatch = e => {
 const attachHandlers = () => {
   $('#save-new-button').on('click', onCreatePatch)
   $('#confirm-save-update-button').on('click', onUpdatePatch)
-  $('#show-patches-bar').on('click', onIndexPatch)
+  // $('#show-patches-bar').on('click', onIndexPatch)
+  $('#patches-bar').on('show.bs.modal', onIndexPatch)
   $('#confirm-delete-button').on('click', onDeletePatch)
 
   $('#cancel-save-update-button').on('click', ui.hideUpdateConfirm)

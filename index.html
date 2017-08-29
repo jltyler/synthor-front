@@ -18,7 +18,7 @@
         </div>
         <div class="col-md-4 patch-info-div">
           <!-- Show patches sidebar -->
-          <button id="show-patches-bar" class="btn btn-info">Patches</button>
+          <button id="show-patches-bar" data-toggle="modal" data-target="#patches-bar" class="btn btn-info">Patches</button>
           <div id="synth-auth-div" class="synth-auth-div hidden">
             <!-- Show the save form button -->
             <button id="show-save-form-button" class="btn btn-info">Save New</button>
@@ -69,10 +69,18 @@
       </nav>
       <!-- END NAV -->
       <!-- START PATCHES BAR -->
-      <div id="patches-bar" class="patches-bar">
-        <h2>Patches</h2>
-        <button id="hide-patches-bar" class="btn btn-lg btn-block btn-danger">Close</button>
-        <div id="patches-list" class="patches-list"></div>
+      <div class="modal left fade patches-bar" id="patches-bar" tabindex="-1" role="dialog" aria-labelledby="patchesBarLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="patches-bar-label">Patches</h4>
+            </div>
+            <div class="modal-body">
+              <div id="patches-list" class="patches-list"></div>
+            </div>
+          </div>
+        </div>
       </div>
       <!-- END PATCHES BAR -->
       <!-- ACTUAL SYNTHESIZER CONTROLS -->
@@ -141,12 +149,39 @@
         </div>
         <!-- FILTER CONTROLS -->
         <div class="col-md-3 filter">
-          <h1>Filter</h1>
-          <h3>Envelope</h3>
-          <input type="text" id="filter-attack" value="0.1">
-          <input type="text" id="filter-decay" value="0.1">
-          <input type="text" id="filter-sustain" value="8000">
-          <input type="text" id="filter-release" value="0.3">
+          <div class="text-center">
+            <h1>Filter</h1>
+            <div class="filter-Q-div knob-div knob-div-side">
+              <h4>Q</h4>
+              <input type="text" id="filter-Q" value="5">
+            </div>
+            <div class="filter-freq-div knob-div">
+              <h3>Frequency</h3>
+              <input type="text" id="filter-freq" value="7500">
+            </div>
+            <div class="filter-env-div knob-div knob-div-side">
+              <h4>Env</h4>
+              <input type="text" id="filter-env" value="0">
+            </div>
+          </div>
+          <div class="filter-tremolo-div text-center">
+            <h1>Tremolo</h1>
+            <div class="filter-trem-amp-div knob-div">
+              <h4>Amplitude</h4>
+              <input type="text" id="filter-trem-amp" value="0">
+            </div>
+            <div class="filter-trem-freq-div knob-div">
+              <h4>Frequency</h4>
+              <input type="text" id="filter-trem-freq" value="0">
+            </div>
+          </div>
+          <div class="filter-envelope-div text-center">
+            <h3>Envelope</h3>
+            <input type="text" id="filter-attack" value="0.1">
+            <input type="text" id="filter-decay" value="0.1">
+            <input type="text" id="filter-sustain" value="0.7">
+            <input type="text" id="filter-release" value="0.3">
+          </div>
         </div>
       </div>
     </body>
