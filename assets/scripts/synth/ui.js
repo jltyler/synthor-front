@@ -227,12 +227,12 @@ const keyboard = new QwertyHancock({
 })
 
 keyboard.keyDown = function (note, frequency) {
-  console.log('kbnotepress:', note, '|', frequency)
+  // console.log('kbnotepress:', note, '|', frequency)
   synth.playNote(note, frequency)
 }
 
 keyboard.keyUp = function (note, frequency) {
-  console.log('kbnoterelease:', note, '|', frequency)
+  // console.log('kbnoterelease:', note, '|', frequency)
   synth.stopNote(note, frequency)
 }
 

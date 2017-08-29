@@ -98,11 +98,6 @@ $('#osc1-decay').knob(Object.assign({
   release: val => synth.setOscEnvelopeDecay(val, 0),
 }, adrKnob))
 
-$('#osc1-release').knob(Object.assign({
-  change: val => synth.setOscEnvelopeRelease(val, 0),
-  release: val => synth.setOscEnvelopeRelease(val, 0),
-}, adrKnob))
-
 $('#osc1-sustain').knob(Object.assign({
   min: 0,
   max: 1,
@@ -110,6 +105,11 @@ $('#osc1-sustain').knob(Object.assign({
   change: val => synth.setOscEnvelopeSustain(val, 0),
   release: val => synth.setOscEnvelopeSustain(val, 0),
 }, smallKnob))
+
+$('#osc1-release').knob(Object.assign({
+  change: val => synth.setOscEnvelopeRelease(val, 0),
+  release: val => synth.setOscEnvelopeRelease(val, 0),
+}, adrKnob))
 
 // Filter knobs
 // Filter main knobs
@@ -135,30 +135,6 @@ $('#filter-env').knob(Object.assign({
   release: val => synth.setFilterEnv(val)
 }, mediumKnob))
 
-// Envelope
-$('#filter-attack').knob(Object.assign({
-  change: synth.setFilterEnvelopeAttack,
-  release: synth.setFilterEnvelopeAttack,
-}, adrKnob))
-
-$('#filter-decay').knob(Object.assign({
-  change: synth.setFilterEnvelopeDecay,
-  release: synth.setFilterEnvelopeDecay,
-}, adrKnob))
-
-$('#filter-release').knob(Object.assign({
-  change: synth.setFilterEnvelopeRelease,
-  release: synth.setFilterEnvelopeRelease,
-}, adrKnob))
-
-$('#filter-sustain').knob(Object.assign({
-  min: 0,
-  max: 1.0,
-  step: 0.05,
-  change: synth.setFilterEnvelopeSustain,
-  release: synth.setFilterEnvelopeSustain,
-}, smallKnob))
-
 // Filter tremolo
 $('#filter-trem-amp').knob(Object.assign({
   min: 0,
@@ -175,6 +151,31 @@ $('#filter-trem-freq').knob(Object.assign({
   release: val => synth.setFilterTremoloFreq(val, 0),
 }, bigKnob))
 
+
+// Filter Envelope
+$('#filter-attack').knob(Object.assign({
+  change: synth.setFilterEnvelopeAttack,
+  release: synth.setFilterEnvelopeAttack,
+}, adrKnob))
+
+$('#filter-decay').knob(Object.assign({
+  change: synth.setFilterEnvelopeDecay,
+  release: synth.setFilterEnvelopeDecay,
+}, adrKnob))
+
+$('#filter-sustain').knob(Object.assign({
+  min: 0,
+  max: 1.0,
+  step: 0.05,
+  change: synth.setFilterEnvelopeSustain,
+  release: synth.setFilterEnvelopeSustain,
+}, smallKnob))
+
+$('#filter-release').knob(Object.assign({
+  change: synth.setFilterEnvelopeRelease,
+  release: synth.setFilterEnvelopeRelease,
+}, adrKnob))
+
 // Trigger change so we set the values to whatever is first displayed
 $('#osc1-volume').trigger('change')
 $('#osc1-detune').trigger('change')
@@ -186,14 +187,14 @@ $('#osc1-trem-amp').trigger('change')
 $('#osc1-trem-freq').trigger('change')
 $('#osc1-attack').trigger('change')
 $('#osc1-decay').trigger('change')
-$('#osc1-release').trigger('change')
 $('#osc1-sustain').trigger('change')
+$('#osc1-release').trigger('change')
 $('#filter-freq').trigger('change')
 $('#filter-Q').trigger('change')
 $('#filter-env').trigger('change')
-$('#filter-attack').trigger('change')
-$('#filter-decay').trigger('change')
-$('#filter-release').trigger('change')
-$('#filter-sustain').trigger('change')
 $('#filter-trem-amp').trigger('change')
 $('#filter-trem-freq').trigger('change')
+$('#filter-attack').trigger('change')
+$('#filter-decay').trigger('change')
+$('#filter-sustain').trigger('change')
+$('#filter-release').trigger('change')

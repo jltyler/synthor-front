@@ -11,4 +11,13 @@ module.exports = (patch) => {
   $('#osc1-decay').val(patch.osc1Decay).trigger('change')
   $('#osc1-sustain').val(patch.osc1Sustain).trigger('change')
   $('#osc1-release').val(patch.osc1Release).trigger('change')
+  $('#filter-freq').val(patch.filterFrequency).trigger('change')
+  $('#filter-Q').val(patch.filterQ).trigger('change')
+  $('#filter-env').val(patch.filterEnv).trigger('change')
+  $('#filter-trem-amp').val(patch.filterTremoloAmp).trigger('change')
+  $('#filter-trem-freq').val(patch.filterTremoloFreq).trigger('change')
+  $('#filter-attack').val(patch.filterAttack).trigger('change')
+  $('#filter-decay').val(patch.filterDecay).trigger('change')
+  $('#filter-sustain').val(patch.filterSustain).trigger('change')
+  $('#filter-release').val(patch.filterRelease).trigger('change')
 }

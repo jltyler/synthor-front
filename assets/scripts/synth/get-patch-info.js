@@ -1,7 +1,7 @@
-module.exports = (useFormName = true) => {
+module.exports = () => {
   return {
     patch: {
-      name: useFormName ? $('#patch-name-input').val() : $('#patch-name-display').text(),
+      name: $('#patch-name-input').val(),
       osc1Volume: +$('#osc1-volume').val() / 100,
       osc1Octave: +$('#osc1-octave').val(),
       osc1Detune: +$('#osc1-detune').val(),
@@ -14,6 +14,15 @@ module.exports = (useFormName = true) => {
       osc1Decay: +$('#osc1-decay').val(),
       osc1Sustain: +$('#osc1-sustain').val(),
       osc1Release: +$('#osc1-release').val(),
+      filterFrequency: +$('#filter-freq').val(),
+      filterQ: +$('#filter-Q').val(),
+      filterEnv: +$('#filter-env').val(),
+      filterTremoloAmp: +$('#filter-trem-amp').val(),
+      filterTremoloFreq: +$('#filter-trem-freq').val(),
+      filterAttack: +$('#filter-attack').val(),
+      filterDecay: +$('#filter-decay').val(),
+      filterSustain: +$('#filter-sustain').val(),
+      filterRelease: +$('#filter-release').val(),
     }
   }
 }
