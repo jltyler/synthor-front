@@ -31,12 +31,13 @@ select {
 }
 
 .patch-item {
-  color: #afa;
-  padding: 8px;
-  border: 2px solid #afa;
+  background-color: #444;
+  // border: 2px solid #afa;
   border-radius: 10px;
+  color: #afa;
   font-size: 20px;
   margin-bottom: 4px;
+  padding: 8px;
 }
 
 .patch-item > span {
@@ -53,6 +54,12 @@ select {
 .btn.load-patch-button:hover {
   background-color: lime;
   color: #000;
+}
+
+.virtual-keyboard-wrapper {
+  margin: 0 auto;
+  width: 753px;
+  border: 5px solid #ddd;
 }
 
 // Fix misaligned keys on the keyboard
