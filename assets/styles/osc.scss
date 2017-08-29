@@ -4,24 +4,22 @@ h4 {
   margin: .3em;
 }
 
-.knob-div,
-.osc1-volume-div,
-.osc1-octave-div,
-.osc1-detune-div,
-.osc1-unison-div,
-.osc1-pan-div,
-.osc1-trem-amp-div,
-.osc1-trem-freq-div
-{
+.knob-div {
   border: 1px solid white;
+  box-sizing: border-box;
   display: inline-block;
-  margin-left: .3em;
-  margin-right: .3em;
+  // margin-left: .1em;
+  // margin-right: .1em;
   text-align: center;
 }
 
-.knob-div-side,
-.osc1-octave-div,
-.osc1-detune-div {
+.knob-div.side {
   margin-top: 1em;
+}
+
+.env-div {
+  margin: 1px;
+  display: inline-block;
+  border: 1px solid white;
+  box-sizing: border-box;
 }

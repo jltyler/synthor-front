@@ -88,15 +88,15 @@
         <div class="col-md-3 osc1">
           <div class="text-center">
             <h1>Osc1</h1>
-            <div class="osc1-octave-div">
+            <div class="knob-div side">
               <h4>Octave</h4>
               <input type="text" id="osc1-octave" value="0">
             </div>
-            <div class="osc1-volume-div">
+            <div class="knob-div">
               <h3>Volume</h3>
               <input type="text" id="osc1-volume" value="50">
             </div>
-            <div class="osc1-detune-div">
+            <div class="knob-div side">
               <h4>Detune</h4>
               <input type="text" id="osc1-detune" value="0">
             </div>
@@ -112,11 +112,11 @@
               </select>
             </div>
             <div class="text-center">
-              <div class="osc1-unison-div">
+              <div class="knob-div">
                 <h4>Unison</h4>
                 <input type="text" id="osc1-unison" value="1">
               </div>
-              <div class="osc1-pan-div">
+              <div class="knob-div">
                 <h4>Panning</h4>
                 <input type="text" id="osc1-pan" value="0">
               </div>
@@ -124,21 +124,33 @@
           </div>
           <div class="osc1-tremolo-div text-center">
             <h3>Tremolo</h3>
-            <div class="osc1-trem-amp-div">
+            <div class="knob-div">
               <h4>Amplitude</h4>
               <input type="text" id="osc1-trem-amp" value="0">
             </div>
-            <div class="osc1-trem-freq-div">
+            <div class="knob-div">
               <h4>Frequency</h4>
               <input type="text" id="osc1-trem-freq" value="0">
             </div>
           </div>
           <div class="osc1-envelope-div text-center">
             <h3>Envelope</h3>
-            <input type="text" id="osc1-attack" value="0.1">
-            <input type="text" id="osc1-decay" value="0.1">
-            <input type="text" id="osc1-sustain" value="1.0">
-            <input type="text" id="osc1-release" value="0.3">
+            <div class="env-div">
+              <input type="text" id="osc1-attack" value="0.1">
+              <h4>A</h4>
+            </div>
+            <div class="env-div">
+              <input type="text" id="osc1-decay" value="0.1">
+              <h4>D</h4>
+            </div>
+            <div class="env-div">
+              <input type="text" id="osc1-sustain" value="1.0">
+              <h4>S</h4>
+            </div>
+            <div class="env-div">
+              <input type="text" id="osc1-release" value="0.3">
+              <h4>R</h4>
+            </div>
           </div>
         </div>
         <div class="col-md-3 osc2">
@@ -151,36 +163,48 @@
         <div class="col-md-3 filter">
           <div class="text-center">
             <h1>Filter</h1>
-            <div class="filter-Q-div knob-div knob-div-side">
+            <div class="knob-div side">
               <h4>Q</h4>
               <input type="text" id="filter-Q" value="5">
             </div>
-            <div class="filter-freq-div knob-div">
-              <h3>Frequency</h3>
+            <div class="knob-div">
+              <h3>Cutoff</h3>
               <input type="text" id="filter-freq" value="7500">
             </div>
-            <div class="filter-env-div knob-div knob-div-side">
+            <div class="knob-div side">
               <h4>Env</h4>
               <input type="text" id="filter-env" value="0">
             </div>
           </div>
           <div class="filter-tremolo-div text-center">
             <h1>Tremolo</h1>
-            <div class="filter-trem-amp-div knob-div">
+            <div class="knob-div">
               <h4>Amplitude</h4>
               <input type="text" id="filter-trem-amp" value="0">
             </div>
-            <div class="filter-trem-freq-div knob-div">
+            <div class="knob-div">
               <h4>Frequency</h4>
               <input type="text" id="filter-trem-freq" value="0">
             </div>
           </div>
           <div class="filter-envelope-div text-center">
             <h3>Envelope</h3>
-            <input type="text" id="filter-attack" value="0.1">
-            <input type="text" id="filter-decay" value="0.1">
-            <input type="text" id="filter-sustain" value="0.7">
-            <input type="text" id="filter-release" value="0.3">
+            <div class="env-div">
+              <input type="text" id="filter-attack" value="0.1">
+              <h4>A</h4>
+            </div>
+            <div class="env-div">
+              <input type="text" id="filter-decay" value="0.1">
+              <h4>D</h4>
+            </div>
+            <div class="env-div">
+              <input type="text" id="filter-sustain" value="0.7">
+              <h4>S</h4>
+            </div>
+            <div class="env-div">
+              <input type="text" id="filter-release" value="0.3">
+              <h4>R</h4>
+            </div>
           </div>
         </div>
       </div>

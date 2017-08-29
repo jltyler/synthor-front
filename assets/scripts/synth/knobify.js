@@ -11,18 +11,18 @@ const standardKnob = {
 
 // Standardized sizes for knobs
 const bigKnob = Object.assign({
-  width: 80,
-  height: 80
+  width: 100,
+  height: 100
 }, standardKnob)
 
 const mediumKnob = Object.assign({
-  width: 60,
-  height: 60
+  width: 90,
+  height: 90
 }, standardKnob)
 
 const smallKnob = Object.assign({
-  width: 50,
-  height: 50
+  width: 75,
+  height: 75
 }, standardKnob)
 
 // Oscillator 1 main knobs
