@@ -3,8 +3,11 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import 'normalize';
 @import 'osc';
 
+$bgcolor: #222;
+$lightblue: #99f;
+
 body {
-  background-color: #222;
+  background-color: $bgcolor;
   color: #eee;
 }
 
@@ -16,7 +19,7 @@ body {
 input,
 option,
 select {
-  color: #222;
+  color: $bgcolor;
 }
 
 .nav ul {
@@ -24,6 +27,62 @@ select {
   li {
     display: inline-block;
   }
+}
+
+.btn-auth {
+  background-color: $bgcolor;
+  border: 1px solid lime;
+  width: 48%;
+  transition: background-color .3s, color .3s;
+  color: lime;
+}
+
+.btn-auth:hover {
+  background-color: lime;
+  color: $bgcolor;
+}
+
+.btn-auth.selectyes,
+.btn-auth.selectyes:active,
+.btn-auth.selectyes:focus
+{
+  background-color: $bgcolor;
+  border: 1px solid lime;
+  width: 24%;
+  transition: background-color .3s, color .3s;
+  color: lime;
+}
+
+.btn-auth.selectyes:hover {
+  background-color: lime;
+  color: $bgcolor;
+}
+
+.btn-auth.selectno {
+  background-color: $bgcolor;
+  border: 1px solid red;
+  width: 24%;
+  transition: background-color .3s, color .3s;
+  color: red;
+}
+
+.btn-auth.selectno:hover {
+  background-color: red;
+  color: $bgcolor;
+}
+
+.btn-show,
+.btn-show:active,
+.btn-show:focus
+{
+  background-color: $bgcolor;
+  color: $lightblue;
+  border: 1px solid $lightblue;
+  transition: background-color .3s, color .3s;
+}
+
+.btn-show:hover {
+  background-color: $lightblue;
 }
 
 .synth-auth-div {
@@ -70,7 +129,7 @@ select {
 // Don't want them ugly LIGHT THEMES BLEARGH
 .modal-content {
   text-align: center;
-  background-color: #222;
+  background-color: $bgcolor;
   color: #eee;
 }
 
@@ -86,7 +145,7 @@ select {
 
 // .patches-bar {
 //   text-align: center;
-//   background-color: #222;
+//   background-color: $bgcolor;
 //   border: 1px solid #aaa;
 //   height: 100%;
 //   width: 320px;

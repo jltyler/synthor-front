@@ -13,58 +13,65 @@
     </head>
     <body class="container-fluid">
       <nav class="row nav">
-        <div class="col-md-2 title">
-          <h2>Synthor</h2>
-        </div>
-        <div class="col-md-4 patch-info-div">
-          <!-- Show patches sidebar -->
-          <button id="show-patches-bar" data-toggle="modal" data-target="#patches-bar" class="btn btn-info">Patches</button>
-          <div id="synth-auth-div" class="synth-auth-div hidden">
-            <!-- Show the save form button -->
-            <button id="show-save-form-button" class="btn btn-info">Save New</button>
-            <!-- Actual save button -->
-            <button id="save-new-button" class="btn btn-success hidden">Save</button>
-            <!-- Display patch name -->
-            <span id="patch-name-display" class="patch-name-display">New Patch</span>
-            <!-- Confirm text -->
-            <span id="confirm-patch-action-display" class="confirm-patch-action-display hidden">Are you sure?</span>
-            <!-- Input new patch name -->
-            <input type="text" id="patch-name-input" placeholder="Patch Name" class="hidden">
-            <!-- Cancel new save button -->
-            <button id="cancel-save-new-button" class="btn btn-danger hidden">Cancel</button>
-            <!-- Overwrite current patch -->
-            <button id="save-update-button" class="btn btn-primary hidden">Save (overwrite)</button>
-            <!-- Cancel and confirm for save update -->
-            <button id="confirm-save-update-button" class="btn btn-success hidden">Confirm</button>
-            <button id="cancel-save-update-button" class="btn btn-danger hidden">Cancel</button>
-            <!-- Delete current patch -->
-            <button id="delete-button" class="btn btn-danger hidden">Delete patch</button>
-            <!-- Cancel and confirm for save update -->
-            <button id="confirm-delete-button" class="btn btn-success hidden">Confirm</button>
-            <button id="cancel-delete-button" class="btn btn-danger hidden">Cancel</button>
+        <div class="row">
+          <div class="col-md-3 title">
+            <h2>Synthor</h2>
+          </div>
+          <div class="col-md-3">
+            <h2 id="auth-error-display"></h2>
+          </div>
+          <!-- Auth Forms -->
+          <div class="col-md-3">
+            <form id="credentials-form">
+              <input type="text" placeholder="Username" name="credentials[email]" value="a">
+              <input type="password" placeholder="Password"  name="credentials[password]" value="a">
+            </form>
+            <form id="changepwd-form" class="hidden">
+              <input type="password" placeholder="Old Password" name="passwords[old]">
+              <input type="password" placeholder="New Password"  name="passwords[new]">
+            </form>
+          </div>
+          <!-- Auth Buttons -->
+          <div class="col-md-3">
+            <button id="login-button" type="button"class="btn btn-auth">Log In</button>
+            <button id="signup-button" type="button"class="btn btn-auth">Sign Up</button>
+            <button id="show-changepwd-button" type="button"class="btn btn-auth hidden">Change Password</button>
+            <button id="changepwd-button" type="button"class="btn btn-auth selectyes hidden">Submit</button>
+            <button id="cancel-changepwd-button" type="button"class="btn btn-auth selectno hidden">Cancel</button>
+            <button id="signout-button" type="button"class="btn btn-auth hidden">Sign Out</button>
           </div>
         </div>
-        <!-- Auth Forms -->
-        <div class="col-md-3">
-          <form id="credentials-form">
-            <input type="text" placeholder="Username" name="credentials[email]" value="a">
-            <input type="password" placeholder="Password"  name="credentials[password]" value="a">
-          </form>
-          <form id="changepwd-form" class="hidden">
-            <input type="password" placeholder="Old Password" name="passwords[old]">
-            <input type="password" placeholder="New Password"  name="passwords[new]">
-          </form>
-        </div>
-        <!-- Auth Buttons -->
-        <div class="col-md-3">
-          <ul>
-            <li><button id="login-button" type="button"class="btn btn-primary btn-sm">Log In </button></li>
-            <li><button id="signup-button" type="button"class="btn btn-info btn-sm">Sign Up</button></li>
-            <li><button id="signout-button" type="button"class="btn btn-info btn-sm hidden">Sign Out</button></li>
-            <li><button id="changepwd-button" type="button"class="btn btn-success btn-sm hidden">Change Password</button></li>
-            <li><button id="show-changepwd-button" type="button"class="btn btn-info btn-sm hidden">Change Password</button></li>
-            <li><button id="cancel-changepwd-button" type="button"class="btn btn-danger btn-sm hidden">Cancel</button></li>
-          </ul>
+        <div class="row">
+          <div class="col-md-3">
+            <!-- Show patches sidebar -->
+            <button id="show-patches-bar" data-toggle="modal" data-target="#patches-bar" class="btn btn-lg btn-block btn-show">Load Patches</button>
+          </div>
+          <div class="col-md-6">
+            <div id="synth-auth-div" class="synth-auth-div hidden">
+              <!-- Show the save form button -->
+              <button id="show-save-form-button" class="btn btn-info">Save New</button>
+              <!-- Actual save button -->
+              <button id="save-new-button" class="btn btn-success hidden">Save</button>
+              <!-- Display patch name -->
+              <span id="patch-name-display" class="patch-name-display">New Patch</span>
+              <!-- Confirm text -->
+              <span id="confirm-patch-action-display" class="confirm-patch-action-display hidden">Are you sure?</span>
+              <!-- Input new patch name -->
+              <input type="text" id="patch-name-input" placeholder="Patch Name" class="hidden">
+              <!-- Cancel new save button -->
+              <button id="cancel-save-new-button" class="btn btn-danger hidden">Cancel</button>
+              <!-- Overwrite current patch -->
+              <button id="save-update-button" class="btn btn-primary hidden">Save (overwrite)</button>
+              <!-- Cancel and confirm for save update -->
+              <button id="confirm-save-update-button" class="btn btn-success hidden">Confirm</button>
+              <button id="cancel-save-update-button" class="btn btn-danger hidden">Cancel</button>
+              <!-- Delete current patch -->
+              <button id="delete-button" class="btn btn-danger hidden">Delete patch</button>
+              <!-- Cancel and confirm for save update -->
+              <button id="confirm-delete-button" class="btn btn-success hidden">Confirm</button>
+              <button id="cancel-delete-button" class="btn btn-danger hidden">Cancel</button>
+            </div>
+          </div>
         </div>
       </nav>
       <!-- END NAV -->

@@ -20,6 +20,17 @@ const changepwdForm = $('#changepwd-form')
 const showChangepwdButton = $('#show-changepwd-button')
 const cancelChangepwdButton = $('#cancel-changepwd-button')
 
+const resetAuthArea = () => {
+  show(signupButton)
+  show(loginButton)
+  show(credentialsForm)
+  hide(signoutButton)
+  hide(changepwdButton)
+  hide(showChangepwdButton)
+  hide(cancelChangepwdButton)
+  hide(changepwdForm)
+}
+
 const signUpSuccess = res => {
   console.log('signUpSuccess')
 }
@@ -48,13 +59,9 @@ const logInError = res => {
 const signOutSuccess = res => {
   console.log('signOutSuccess')
   store.user = null
-  show(signupButton)
-  show(loginButton)
-  show(credentialsForm)
-  hide(signoutButton)
-  hide(showChangepwdButton)
-  hide($('#synth-auth-div'))
+  resetAuthArea()
   synthUi.resetPatchSaveArea()
+  hide($('#synth-auth-div'))
 }
 const signOutError = res => {
   console.log('signOutError')
