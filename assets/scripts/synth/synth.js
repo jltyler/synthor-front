@@ -3,15 +3,27 @@ const audioCtx = new window.AudioContext()
 
 // Ends up being objects of arrays so I can have multiple of the same note playing
 const osc1 = {}
+const osc2 = {}
 
 // Main gain node for osc1
 const osc1GainNode = audioCtx.createGain()
-osc1GainNode.gain.value = 0.8
+osc1GainNode.gain.value = 0.5
 osc1GainNode.connect(audioCtx.destination)
 
 // Compressor to clamp the max output for polyphony
 const osc1Compressor = audioCtx.createDynamicsCompressor()
 osc1Compressor.connect(osc1GainNode)
+
+// Main gain node for osc2
+const osc2GainNode = audioCtx.createGain()
+osc2GainNode.gain.value = 0.5
+osc2GainNode.connect(audioCtx.destination)
+
+// Compressor to clamp the max output for polyphony
+const osc2Compressor = audioCtx.createDynamicsCompressor()
+osc2Compressor.connect(osc2GainNode)
+
+const compressors = [osc1Compressor, osc2Compressor]
 
 const filterOptions = {
   freq: 7500,
@@ -26,6 +38,19 @@ const filterOptions = {
 }
 
 const oscOptions = [
+  {
+    type: 'sawtooth',
+    attack: 0.1,
+    decay: 0.1,
+    sustain: 1.0,
+    release: 0.3,
+    detune: 1.0,
+    octave: 1.0,
+    unison: 1,
+    pan: 0,
+    tremAmp: 0,
+    tremFreq: 0
+  },
   {
     type: 'sawtooth',
     attack: 0.1,
@@ -117,7 +142,7 @@ class Voice {
     // Connect the nodes and start
     this.fenv.connect(this.env)
     this.env.connect(this.pan)
-    this.pan.connect(osc1Compressor)
+    this.pan.connect(compressors[oscId])
   }
 
   release () {
@@ -160,6 +185,11 @@ const playNote = (note, frequency) => {
   } else {
     osc1[note].push(new Voice(frequency, 0))
   }
+  if (!osc2[note]) {
+    osc2[note] = [new Voice(frequency, 1)]
+  } else {
+    osc2[note].push(new Voice(frequency, 1))
+  }
 }
 
 // Release a note
@@ -168,10 +198,18 @@ const stopNote = (note, frequency) => {
     const voice = osc1[note].shift()
     voice.release()
   }
+  if (osc2[note].length > 0) {
+    const voice = osc2[note].shift()
+    voice.release()
+  }
 }
 
 const setOscVolume = (value, osc = 0) => {
-  osc1GainNode.gain.value = value
+  if (osc === 0) {
+    osc1GainNode.gain.value = value
+  } else {
+    osc2GainNode.gain.value = value
+  }
 }
 
 const setOscDetune = (value, osc = 0) => {

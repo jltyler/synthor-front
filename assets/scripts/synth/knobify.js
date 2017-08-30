@@ -25,61 +25,6 @@ const smallKnob = Object.assign({
   height: 75
 }, standardKnob)
 
-// Oscillator 1 main knobs
-$('#osc1-volume').knob(Object.assign({
-  change: val => synth.setOscVolume(val / 100, 0),
-  release: val => synth.setOscVolume(val / 100, 0)
-}, bigKnob))
-
-$('#osc1-detune').knob(Object.assign({
-  min: -1200,
-  max: 1200,
-  step: 5,
-  change: val => synth.setOscDetune(2 ** (val / 1200), 0),
-  release: val => synth.setOscDetune(2 ** (val / 1200), 0)
-}, mediumKnob))
-
-$('#osc1-octave').knob(Object.assign({
-  min: -2,
-  max: 2,
-  release: val => synth.setOscOctave(2 ** val, 0)
-}, mediumKnob))
-
-// Oscillator 1 second set of knobs
-$('#osc1-waveform').on('change', e => {
-  // console.log(e);
-  synth.setOscWaveform(e.target.value, 0)
-})
-
-$('#osc1-unison').knob(Object.assign({
-  min: 1,
-  max: 4,
-  release: val => synth.setOscUnison(val, 0)
-}, bigKnob))
-
-$('#osc1-pan').knob(Object.assign({
-  min: -1.0,
-  max: 1.0,
-  step: 0.05,
-  change: val => synth.setOscPan(val, 0),
-  release: val => synth.setOscPan(val, 0),
-}, bigKnob))
-
-// Osc1 tremolo
-$('#osc1-trem-amp').knob(Object.assign({
-  min: 0,
-  max: 25,
-  change: val => synth.setOscTremoloAmp(val, 0),
-  release: val => synth.setOscTremoloAmp(val, 0),
-}, bigKnob))
-
-$('#osc1-trem-freq').knob(Object.assign({
-  min: 0,
-  max: 25,
-  change: val => synth.setOscTremoloFreq(val, 0),
-  release: val => synth.setOscTremoloFreq(val, 0),
-}, bigKnob))
-
 // Standard Attack Decay Release knob
 const adrKnob = Object.assign({
   min: 0,
@@ -87,29 +32,86 @@ const adrKnob = Object.assign({
   step: 0.1
 }, smallKnob)
 
-// Osc1 envelope
-$('#osc1-attack').knob(Object.assign({
-  change: val => synth.setOscEnvelopeAttack(val, 0),
-  release: val => synth.setOscEnvelopeAttack(val, 0),
-}, adrKnob))
+for (let i = 0; i < 2; i++) {
+  // Oscillator 1 main knobs
+  $('#osc' + (i + 1) + '-volume').knob(Object.assign({
+    change: val => synth.setOscVolume(val / 100, i),
+    release: val => synth.setOscVolume(val / 100, i)
+  }, bigKnob))
 
-$('#osc1-decay').knob(Object.assign({
-  change: val => synth.setOscEnvelopeDecay(val, 0),
-  release: val => synth.setOscEnvelopeDecay(val, 0),
-}, adrKnob))
+  $('#osc' + (i + 1) + '-detune').knob(Object.assign({
+    min: -1200,
+    max: 1200,
+    step: 5,
+    change: val => synth.setOscDetune(2 ** (val / 1200), i),
+    release: val => synth.setOscDetune(2 ** (val / 1200), i)
+  }, mediumKnob))
 
-$('#osc1-sustain').knob(Object.assign({
-  min: 0,
-  max: 1,
-  step: 0.05,
-  change: val => synth.setOscEnvelopeSustain(val, 0),
-  release: val => synth.setOscEnvelopeSustain(val, 0),
-}, smallKnob))
+  $('#osc' + (i + 1) + '-octave').knob(Object.assign({
+    min: -2,
+    max: 2,
+    release: val => synth.setOscOctave(2 ** val, i)
+  }, mediumKnob))
 
-$('#osc1-release').knob(Object.assign({
-  change: val => synth.setOscEnvelopeRelease(val, 0),
-  release: val => synth.setOscEnvelopeRelease(val, 0),
+  // Oscillator 1 second set of knobs
+  $('#osc' + (i + 1) + '-waveform').on('change', e => {
+    // console.log(e);
+    synth.setOscWaveform(e.target.value, i)
+  })
+
+  $('#osc' + (i + 1) + '-unison').knob(Object.assign({
+    min: 1,
+    max: 4,
+    release: val => synth.setOscUnison(val, i)
+  }, bigKnob))
+
+  $('#osc' + (i + 1) + '-pan').knob(Object.assign({
+    min: -1.0,
+    max: 1.0,
+    step: 0.05,
+    change: val => synth.setOscPan(val, i),
+    release: val => synth.setOscPan(val, i),
+  }, bigKnob))
+
+  // Osc1 tremolo
+  $('#osc' + (i + 1) + '-trem-amp').knob(Object.assign({
+    min: 0,
+    max: 25,
+    change: val => synth.setOscTremoloAmp(val, i),
+    release: val => synth.setOscTremoloAmp(val, i),
+  }, bigKnob))
+
+  $('#osc' + (i + 1) + '-trem-freq').knob(Object.assign({
+    min: 0,
+    max: 25,
+    change: val => synth.setOscTremoloFreq(val, i),
+    release: val => synth.setOscTremoloFreq(val, i),
+  }, bigKnob))
+
+  // Osc1 envelope
+  $('#osc' + (i + 1) + '-attack').knob(Object.assign({
+    change: val => synth.setOscEnvelopeAttack(val, i),
+    release: val => synth.setOscEnvelopeAttack(val, i),
+  }, adrKnob))
+
+  $('#osc' + (i + 1) + '-decay').knob(Object.assign({
+    change: val => synth.setOscEnvelopeDecay(val, i),
+    release: val => synth.setOscEnvelopeDecay(val, i),
+  }, adrKnob))
+
+  $('#osc' + (i + 1) + '-sustain').knob(Object.assign({
+    min: 0,
+    max: 1,
+    step: 0.05,
+    change: val => synth.setOscEnvelopeSustain(val, i),
+    release: val => synth.setOscEnvelopeSustain(val, i),
+  }, smallKnob))
+
+  $('#osc' + (i + 1) + '-release').knob(Object.assign({
+    change: val => synth.setOscEnvelopeRelease(val, i),
+    release: val => synth.setOscEnvelopeRelease(val, i),
 }, adrKnob))
+}
 
 // Filter knobs
 // Filter main knobs
