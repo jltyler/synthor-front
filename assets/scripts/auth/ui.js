@@ -20,6 +20,8 @@ const changepwdForm = $('#changepwd-form')
 const showChangepwdButton = $('#show-changepwd-button')
 const cancelChangepwdButton = $('#cancel-changepwd-button')
 
+const authErrorDisplay = $('#auth-error-display')
+
 const resetAuthArea = () => {
   show(signupButton)
   show(loginButton)
@@ -31,12 +33,21 @@ const resetAuthArea = () => {
   hide(changepwdForm)
 }
 
+const showError = res => {
+  authErrorDisplay.html('An error has occured.<br />Please try again.')
+  // authErrorDisplay.removeClass('error-display-fade')
+  setTimeout(() => {
+    authErrorDisplay.html('')
+  }, 3000)
+}
+
 const signUpSuccess = res => {
   console.log('signUpSuccess')
 }
 const signUpError = res => {
   console.log('signUpError')
   console.log(res)
+  showError()
 }
 
 const logInSuccess = res => {
@@ -54,6 +65,7 @@ const logInSuccess = res => {
 const logInError = res => {
   console.log('logInError')
   console.log(res)
+  showError()
 }
 
 const signOutSuccess = res => {
@@ -75,6 +87,7 @@ const changepwdSuccess = res => {
 const changepwdError = res => {
   console.log('changepwdError')
   console.log(res)
+  showError()
 }
 
 const showChangepwdForm = () => {

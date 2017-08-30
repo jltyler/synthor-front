@@ -29,6 +29,16 @@ const confirmPatchActionDisplay = $('#confirm-patch-action-display')
 const patchesBar = $('#patches-bar')
 const patchesList = $('#patches-list')
 
+const authErrorDisplay = $('#auth-error-display')
+
+const showError = res => {
+  authErrorDisplay.html('An error has occured.<br />Please try again.')
+  // authErrorDisplay.removeClass('error-display-fade')
+  setTimeout(() => {
+    authErrorDisplay.html('')
+  }, 3000)
+}
+
 const resetPatchSaveArea = () => {
   show(showSaveFormButton)
   show(patchNameDisplay)
@@ -168,6 +178,7 @@ const createPatchSuccess = res => {
 const createPatchError = res => {
   console.log('createPatchError')
   console.log(res)
+  showError()
 }
 
 const updatePatchSuccess = res => {
@@ -178,6 +189,7 @@ const updatePatchSuccess = res => {
 const updatePatchError = res => {
   console.log('updatePatchError')
   console.log(res)
+  showError()
 }
 
 const indexPatchSuccess = res => {

@@ -14,11 +14,11 @@
     <body class="container-fluid">
       <nav class="row nav">
         <div class="row">
-          <div class="col-md-3 title">
-            <h2>Synthor</h2>
+          <div class="col-md-3 title text-center">
+            <h2 class="main-title">Synthor</h2>
           </div>
-          <div class="col-md-3">
-            <h2 id="auth-error-display"></h2>
+          <div class="col-md-3 text-center error-display">
+            <h4 id="auth-error-display"></h4>
           </div>
           <!-- Auth Forms -->
           <div class="col-md-3">
@@ -46,30 +46,33 @@
             <!-- Show patches sidebar -->
             <button id="show-patches-bar" data-toggle="modal" data-target="#patches-bar" class="btn btn-lg btn-block btn-show">Load Patches</button>
           </div>
+          <div class="col-md-3">
+            <!-- Display patch name -->
+            <h3 id="patch-name-display" class="patch-name-display text-center">New Patch</h3>
+            <!-- Confirm text -->
+            <h3 id="confirm-patch-action-display" class="confirm-patch-action-display text-center hidden">Are you sure?</h3>
+            <!-- Input new patch name -->
+            <input type="text" id="patch-name-input" placeholder="Patch Name" class="patch-name-input hidden">
+          </div>
           <div class="col-md-6">
             <div id="synth-auth-div" class="synth-auth-div hidden">
               <!-- Show the save form button -->
-              <button id="show-save-form-button" class="btn btn-info">Save New</button>
+              <button id="show-save-form-button" class="btn btn-lg btn-save">Save New</button>
               <!-- Actual save button -->
-              <button id="save-new-button" class="btn btn-success hidden">Save</button>
-              <!-- Display patch name -->
-              <span id="patch-name-display" class="patch-name-display">New Patch</span>
-              <!-- Confirm text -->
-              <span id="confirm-patch-action-display" class="confirm-patch-action-display hidden">Are you sure?</span>
-              <!-- Input new patch name -->
-              <input type="text" id="patch-name-input" placeholder="Patch Name" class="hidden">
+              <button id="save-new-button" class="btn btn-lg btn-confirm hidden">Save</button>
+
               <!-- Cancel new save button -->
-              <button id="cancel-save-new-button" class="btn btn-danger hidden">Cancel</button>
+              <button id="cancel-save-new-button" class="btn btn-lg btn-cancel hidden">Cancel</button>
               <!-- Overwrite current patch -->
-              <button id="save-update-button" class="btn btn-primary hidden">Save (overwrite)</button>
+              <button id="save-update-button" class="btn btn-lg btn-show hidden">Save (overwrite)</button>
               <!-- Cancel and confirm for save update -->
-              <button id="confirm-save-update-button" class="btn btn-success hidden">Confirm</button>
-              <button id="cancel-save-update-button" class="btn btn-danger hidden">Cancel</button>
+              <button id="confirm-save-update-button" class="btn btn-lg btn-confirm hidden">Confirm</button>
+              <button id="cancel-save-update-button" class="btn btn-lg btn-cancel hidden">Cancel</button>
               <!-- Delete current patch -->
-              <button id="delete-button" class="btn btn-danger hidden">Delete patch</button>
+              <button id="delete-button" class="btn btn-lg btn-cancel hidden">Delete patch</button>
               <!-- Cancel and confirm for save update -->
-              <button id="confirm-delete-button" class="btn btn-success hidden">Confirm</button>
-              <button id="cancel-delete-button" class="btn btn-danger hidden">Cancel</button>
+              <button id="confirm-delete-button" class="btn btn-lg btn-confirm hidden">Confirm</button>
+              <button id="cancel-delete-button" class="btn btn-lg btn-cancel hidden">Cancel</button>
             </div>
           </div>
         </div>
@@ -110,7 +113,7 @@
           </div>
           <div class="osc1-settings-div">
             <div class="osc1-waveform-div text-center">
-              <h3>Type</h3>
+              <h3>Waveform</h3>
               <select id="osc1-waveform">
                 <option value="sine">Sine</option>
                 <option value="sawtooth" selected>Sawtooth</option>

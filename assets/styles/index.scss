@@ -1,5 +1,6 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+@import url(https://fonts.googleapis.com/css?family=Cuprum:700|Days+One);
 @import 'normalize';
 @import 'osc';
 
@@ -9,6 +10,27 @@ $lightblue: #99f;
 body {
   background-color: $bgcolor;
   color: #eee;
+  font-family: 'Cuprum';
+  font-variant: small-caps;
+}
+
+.main-title {
+  font-family: 'Days One';
+  margin: .35em;
+
+}
+
+button,
+input {
+  font-family: 'Cuprum';
+}
+
+button {
+  text-transform: uppercase;
+}
+
+input {
+  font-variant: normal;
 }
 
 .nav form,
@@ -19,7 +41,12 @@ body {
 input,
 option,
 select {
-  color: $bgcolor;
+  background-color: $bgcolor;
+}
+
+input {
+  font-size: 18px;
+  width: 100%;
 }
 
 .nav ul {
@@ -71,6 +98,22 @@ select {
   color: $bgcolor;
 }
 
+.error-display {
+  color: red;
+}
+
+.error-display-fade {
+  color: $bgcolor;
+  transition: color 1s;
+}
+
+.patch-name-input,
+.patch-name-display,
+.confirm-patch-action-display
+{
+  font-size: 28px;
+}
+
 .btn-show,
 .btn-show:active,
 .btn-show:focus
@@ -83,6 +126,39 @@ select {
 
 .btn-show:hover {
   background-color: $lightblue;
+}
+
+.btn-confirm {
+  background-color: $bgcolor;
+  color: lime;
+  border: 1px solid lime;
+  transition: background-color .3s, color .3s;
+}
+
+.btn-confirm:hover {
+  background-color: lime;
+}
+
+.btn-cancel {
+  background-color: $bgcolor;
+  color: red;
+  border: 1px solid red;
+  transition: background-color .3s, color .3s;
+}
+
+.btn-cancel:hover {
+  background-color: red;
+}
+
+.btn-save {
+  background-color: $bgcolor;
+  color: blue;
+  border: 1px solid blue;
+  transition: background-color .3s, color .3s;
+}
+
+.btn-save:hover {
+  background-color: blue;
 }
 
 .synth-auth-div {
