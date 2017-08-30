@@ -8,13 +8,17 @@ require('./synth/knobify')
 const synth = require('./synth/synth')
 const authEvents = require('./auth/events')
 const synthEvents = require('./synth/events')
+const synthUi = require('./synth/ui')
 
 $(() => {
   setAPIOrigin(location, config)
   authEvents.attachHandlers()
   synthEvents.attachHandlers()
   // synth.displayValues()
+  synthUi.setupKeyboard()
 })
+
+// window.onresize = synthUi.setupKeyboard
 
 // use require with a reference to bundle the file and use it in this file
 // const example = require('./example')

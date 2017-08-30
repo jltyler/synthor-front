@@ -1,0 +1,62 @@
+@import 'colors';
+
+.btn {
+  text-transform: uppercase;
+}
+
+.btn.btn-out {
+  background-color: $bgcolor;
+  border: 1px solid white;
+}
+
+.btn.btn-fade {
+  transition: background-color .3s, color .3s;
+}
+
+.btn.btn-fade:hover {
+  color: $bgcolor;
+}
+
+.btn.btn-green {
+  border-color: $green;
+  color: $green;
+}
+
+.btn.btn-green:hover {
+  background-color: $green;
+}
+
+.btn.btn-red {
+  border-color: $red;
+  color: $red;
+}
+
+.btn.btn-red:hover {
+  background-color: $red;
+}
+
+.btn.btn-blue {
+  border-color: $blue;
+  color: $blue;
+}
+
+.btn.btn-blue:hover {
+  background-color: $blue;
+}
+
+.btn.btn-lblue {
+  border-color: $lblue;
+  color: $lblue;
+}
+
+.btn.btn-lblue:hover {
+  background-color: $lblue;
+}
+
+.btn.btn-auth {
+  width: 48%;
+}
+
+.btn.btn-select {
+  width: 24%
+}

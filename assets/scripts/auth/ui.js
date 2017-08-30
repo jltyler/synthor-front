@@ -33,8 +33,8 @@ const resetAuthArea = () => {
   hide(changepwdForm)
 }
 
-const showError = res => {
-  authErrorDisplay.html('An error has occured.<br />Please try again.')
+const showError = message => {
+  authErrorDisplay.html(message || 'An error has occured.<br />Please try again.')
   // authErrorDisplay.removeClass('error-display-fade')
   setTimeout(() => {
     authErrorDisplay.html('')
@@ -61,6 +61,7 @@ const logInSuccess = res => {
   show(signoutButton)
   show(showChangepwdButton)
   show($('#synth-auth-div'))
+  credentialsForm.children('input').val('')
 }
 const logInError = res => {
   console.log('logInError')
@@ -83,6 +84,7 @@ const signOutError = res => {
 const changepwdSuccess = res => {
   console.log('changepwdSuccess')
   hideChangepwdForm()
+  changepwdForm.children('input').val('')
 }
 const changepwdError = res => {
   console.log('changepwdError')
@@ -114,5 +116,6 @@ module.exports = {
   changepwdSuccess,
   changepwdError,
   showChangepwdForm,
-  hideChangepwdForm
+  hideChangepwdForm,
+  showError
 }

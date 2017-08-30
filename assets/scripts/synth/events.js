@@ -7,6 +7,10 @@ const ui = require('./ui')
 const onCreatePatch = e => {
   e.preventDefault()
   const data = getPatchInfo(true)
+  if (!data.patch.name) {
+    ui.showError('You must enter a patch name!')
+    return
+  }
   console.log(data)
   if (store.user) {
     api.createPatch(data)
@@ -69,9 +73,9 @@ const attachHandlers = () => {
   $('#patches-bar').on('show.bs.modal', onIndexPatch)
   $('#confirm-delete-button').on('click', onDeletePatch)
 
+  $('#show-save-form-button').on('click', ui.showSaveForm)
   $('#cancel-save-update-button').on('click', ui.hideUpdateConfirm)
   $('#save-update-button').on('click', ui.showUpdateConfirm)
-  $('#show-save-form-button').on('click', ui.showSaveForm)
   $('#cancel-save-new-button').on('click', ui.hideSaveForm)
   $('#delete-button').on('click', ui.showDeleteConfirm)
   $('#cancel-delete-button').on('click', ui.hideDeleteConfirm)

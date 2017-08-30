@@ -22,6 +22,7 @@ const confirmDeleteButton = $('#confirm-delete-button')
 
 // Inputs
 const patchNameInput = $('#patch-name-input')
+const patchPrivate = $('#patch-private')
 
 // Display elements
 const patchNameDisplay = $('#patch-name-display')
@@ -31,8 +32,8 @@ const patchesList = $('#patches-list')
 
 const authErrorDisplay = $('#auth-error-display')
 
-const showError = res => {
-  authErrorDisplay.html('An error has occured.<br />Please try again.')
+const showError = message => {
+  authErrorDisplay.html(message || 'An error has occured.<br />Please try again.')
   // authErrorDisplay.removeClass('error-display-fade')
   setTimeout(() => {
     authErrorDisplay.html('')
@@ -53,6 +54,7 @@ const resetPatchSaveArea = () => {
   hide(deleteButton)
   hide(cancelDeleteButton)
   hide(confirmDeleteButton)
+  hide(patchPrivate)
 }
 
 const showSaveForm = () => {
@@ -63,6 +65,10 @@ const showSaveForm = () => {
   show(saveNewButton)
   show(patchNameInput)
   show(cancelSaveNewButton)
+  show(patchPrivate)
+  if (store.patch) {
+    patchNameInput.val(store.patch.name)
+  }
 }
 
 const hideSaveForm = () => {
@@ -71,6 +77,7 @@ const hideSaveForm = () => {
   hide(saveNewButton)
   hide(patchNameInput)
   hide(cancelSaveNewButton)
+  hide(patchPrivate)
   checkPatchOwnership()
 }
 
@@ -174,6 +181,7 @@ const createPatchSuccess = res => {
   hideSaveForm()
   show(saveUpdateButton)
   show(deleteButton)
+  patchNameInput.val('')
 }
 const createPatchError = res => {
   console.log('createPatchError')
@@ -227,25 +235,28 @@ const deletePatchError = res => {
   console.log(res)
 }
 
-const keyboard = new QwertyHancock({
-  id: 'virtual-keyboard',
-  width: 750,
-  height: 180,
-  octaves: 2,
-  startNote: 'C3',
-  whiteNotesColour: 'white',
-  blackNotesColour: 'black',
-  hoverColour: '#9900ff'
-})
+const setupKeyboard = () => {
+  console.log(window.innerWidth)
+  const keyboard = new QwertyHancock({
+    id: 'virtual-keyboard',
+    width: 750,
+    height: 180,
+    octaves: 2,
+    startNote: 'C3',
+    whiteNotesColour: 'white',
+    blackNotesColour: 'black',
+    hoverColour: '#9900ff'
+  })
 
-keyboard.keyDown = function (note, frequency) {
-  // console.log('kbnotepress:', note, '|', frequency)
-  synth.playNote(note, frequency)
-}
+  keyboard.keyDown = function (note, frequency) {
+    // console.log('kbnotepress:', note, '|', frequency)
+    synth.playNote(note, frequency)
+  }
 
-keyboard.keyUp = function (note, frequency) {
-  // console.log('kbnoterelease:', note, '|', frequency)
-  synth.stopNote(note, frequency)
+  keyboard.keyUp = function (note, frequency) {
+    // console.log('kbnoterelease:', note, '|', frequency)
+    synth.stopNote(note, frequency)
+  }
 }
 
 module.exports = {
@@ -267,4 +278,6 @@ module.exports = {
   indexPatchError,
   deletePatchSuccess,
   deletePatchError,
+  showError,
+  setupKeyboard
 }

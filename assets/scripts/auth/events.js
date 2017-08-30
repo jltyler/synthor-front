@@ -6,6 +6,10 @@ const store = require('../store')
 const onSignUp = e => {
   e.preventDefault()
   const data = getFormFields(document.getElementById('credentials-form'))
+  if (!data.credentials.email || !data.credentials.password) {
+    ui.showError('Enter a username and a password!')
+    return
+  }
   console.log('data:', data)
   api.signUp(data)
     .then(ui.signUpSuccess)
@@ -17,6 +21,10 @@ const onSignUp = e => {
 const onLogIn = e => {
   e.preventDefault()
   const data = getFormFields(document.getElementById('credentials-form'))
+  if (!data.credentials.email || !data.credentials.password) {
+    ui.showError('Enter a username and a password!')
+    return
+  }
   console.log('data:', data)
   api.logIn(data)
     .then(ui.logInSuccess)
@@ -38,6 +46,10 @@ const onSignOut = e => {
 const onChangepwd = e => {
   e.preventDefault()
   const data = getFormFields(document.getElementById('changepwd-form'))
+  if (!data.passwords.old || !data.passwords.new) {
+    ui.showError('Enter your old password and your new password!')
+    return
+  }
   if (store.user) {
     api.changepwd(data)
       .then(ui.changepwdSuccess)

@@ -3,6 +3,7 @@ module.exports = () => {
   return {
     patch: {
       name: $('#patch-name-input').val(),
+      isPrivate: $('#patch-private').val() === 't',
       osc1Volume: +$('#osc1-volume').val() / 100,
       osc1Octave: +$('#osc1-octave').val(),
       osc1Detune: +$('#osc1-detune').val(),
