@@ -175,26 +175,3 @@ $('#filter-release').knob(Object.assign({
   change: synth.setFilterEnvelopeRelease,
   release: synth.setFilterEnvelopeRelease,
 }, adrKnob))
-
-// Trigger change so we set the values to whatever is first displayed
-$('#osc1-volume').trigger('change')
-$('#osc1-detune').trigger('change')
-$('#osc1-octave').trigger('change')
-$('#osc1-waveform').trigger('change')
-$('#osc1-unison').trigger('change')
-$('#osc1-pan').trigger('change')
-$('#osc1-trem-amp').trigger('change')
-$('#osc1-trem-freq').trigger('change')
-$('#osc1-attack').trigger('change')
-$('#osc1-decay').trigger('change')
-$('#osc1-sustain').trigger('change')
-$('#osc1-release').trigger('change')
-$('#filter-freq').trigger('change')
-$('#filter-Q').trigger('change')
-$('#filter-env').trigger('change')
-$('#filter-trem-amp').trigger('change')
-$('#filter-trem-freq').trigger('change')
-$('#filter-attack').trigger('change')
-$('#filter-decay').trigger('change')
-$('#filter-sustain').trigger('change')
-$('#filter-release').trigger('change')

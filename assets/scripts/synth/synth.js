@@ -10,19 +10,19 @@ osc1GainNode.gain.value = 0.8
 osc1GainNode.connect(audioCtx.destination)
 
 // Compressor to clamp the max output for polyphony
-const compressor = audioCtx.createDynamicsCompressor()
-compressor.connect(osc1GainNode)
+const osc1Compressor = audioCtx.createDynamicsCompressor()
+osc1Compressor.connect(osc1GainNode)
 
 const filterOptions = {
-  freq: 12000,
-  q: 10,
+  freq: 7500,
+  q: 5,
   env: 0,
   tremAmp: 0,
   tremFreq: 0,
   attack: 0.1,
   decay: 0.1,
-  sustain: 8000,
-  release: 0.4,
+  sustain: 0.7,
+  release: 0.3,
 }
 
 const oscOptions = [
@@ -31,7 +31,7 @@ const oscOptions = [
     attack: 0.1,
     decay: 0.1,
     sustain: 1.0,
-    release: 0.4,
+    release: 0.3,
     detune: 1.0,
     octave: 1.0,
     unison: 1,
@@ -41,34 +41,36 @@ const oscOptions = [
   }
 ]
 
+const newOscillator = (frequency, oscId) => {
+  // console.log('newOscillator');
+  const o = audioCtx.createOscillator()
+  o.frequency.value = frequency
+  o.type = oscOptions[oscId].type
+  return o
+}
+
 class Voice {
   constructor (frequency, oscId = 0) {
     const now = audioCtx.currentTime
-    this.options = oscOptions[oscId]
-
-    // Oscillator and settings
-    this.osc = audioCtx.createOscillator()
-    this.osc.frequency.value = frequency * this.options.octave * this.options.detune
-    this.osc.type = this.options.type
+    this.opt = oscOptions[oscId]
 
     // Osc Tremolo
     this.tremOsc = audioCtx.createOscillator()
-    this.tremOsc.frequency.value = this.options.tremFreq
+    this.tremOsc.frequency.value = this.opt.tremFreq
     this.tremGain = audioCtx.createGain()
-    this.tremGain.gain.value = this.options.tremAmp
+    this.tremGain.gain.value = this.opt.tremAmp
     this.tremOsc.connect(this.tremGain)
-    this.tremGain.connect(this.osc.frequency)
     this.tremOsc.start()
 
     // Pan
     this.pan = audioCtx.createStereoPanner()
-    this.pan.pan.setValueAtTime(this.options.pan, now)
+    this.pan.pan.setValueAtTime(this.opt.pan, now)
 
     // Gain envelope
     this.env = audioCtx.createGain()
     this.env.gain.setValueAtTime(0.0, now)
-    this.env.gain.linearRampToValueAtTime(1, now + this.options.attack)
-    this.env.gain.linearRampToValueAtTime(this.options.sustain, now + this.options.attack + this.options.decay)
+    this.env.gain.linearRampToValueAtTime(1, now + this.opt.attack)
+    this.env.gain.linearRampToValueAtTime(this.opt.sustain, now + this.opt.attack + this.opt.decay)
 
     // Filter envelope
     this.fenv = audioCtx.createBiquadFilter()
@@ -86,12 +88,36 @@ class Voice {
     this.filterTremGain.connect(this.fenv.frequency)
     this.filterTremOsc.start()
 
+    // Oscillator(s) and settings
+    // Oscillators are created last so I only have to hit the loop once in the
+    // case of a unison and starting the oscillators
+    this.oscs = []
+    const baseFreq = frequency * this.opt.octave * this.opt.detune
+    const unisonSpread = 2
+    // Create unisons
+    if (this.opt.unison > 1) {
+      const minFreq = (unisonSpread / 2) * -1
+      const inc = unisonSpread / (this.opt.unison - 1)
+      for (let i = 0; i < this.opt.unison; i++) {
+        const uFreq = minFreq + i * inc
+        const o = newOscillator(baseFreq + uFreq, oscId)
+        this.tremGain.connect(o.frequency)
+        o.connect(this.fenv)
+        o.start()
+        this.oscs.push(o)
+      }
+    } else {
+      const o = newOscillator(baseFreq, oscId)
+      this.tremGain.connect(o.frequency)
+      o.connect(this.fenv)
+      o.start()
+      this.oscs.push(o)
+    }
+
     // Connect the nodes and start
-    this.osc.connect(this.fenv)
     this.fenv.connect(this.env)
     this.env.connect(this.pan)
-    this.pan.connect(compressor)
-    this.osc.start()
+    this.pan.connect(osc1Compressor)
   }
 
   release () {
@@ -100,7 +126,7 @@ class Voice {
     // Stop any values and start release
     this.env.gain.cancelScheduledValues(now)
     this.env.gain.setValueAtTime(this.env.gain.value, now)
-    this.env.gain.linearRampToValueAtTime(0.0, now + this.options.release)
+    this.env.gain.linearRampToValueAtTime(0.0, now + this.opt.release)
 
     this.fenv.frequency.cancelScheduledValues(now)
     this.fenv.frequency.setValueAtTime(this.fenv.frequency.value, now)
@@ -108,8 +134,12 @@ class Voice {
 
     // Once release is finished, we stop the oscillator and remove connections
     setTimeout(() => {
-      this.osc.stop()
-      this.osc.disconnect()
+      // this.osc.stop()
+      // this.osc.disconnect()
+      this.oscs.forEach(o => {
+        o.stop()
+        o.disconnect()
+      })
       this.fenv.disconnect()
       this.env.disconnect()
       this.pan.disconnect()
@@ -119,7 +149,7 @@ class Voice {
       this.tremGain.disconnect()
       this.filterTremOsc.disconnect()
       this.filterTremGain.disconnect()
-    }, Math.max(this.options.release, filterOptions.release) * 1000)
+    }, Math.max(this.opt.release, filterOptions.release) * 1000)
   }
 }
 
@@ -224,11 +254,12 @@ const setFilterEnvelopeRelease = (value) => {
   filterOptions.release = value
 }
 
-const init = () => {
+const displayValues = () => {
+  console.log('filterOptions', filterOptions)
+  console.log('oscOptions', oscOptions)
 }
 
 module.exports = {
-  init,
   setOscVolume,
   setOscDetune,
   setOscOctave,
@@ -252,4 +283,5 @@ module.exports = {
   setFilterEnvelopeRelease,
   playNote,
   stopNote,
+  displayValues
 }

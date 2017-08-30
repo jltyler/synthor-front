@@ -13,7 +13,7 @@ $(() => {
   setAPIOrigin(location, config)
   authEvents.attachHandlers()
   synthEvents.attachHandlers()
-  synth.init()
+  // synth.displayValues()
 })
 
 // use require with a reference to bundle the file and use it in this file

@@ -152,7 +152,6 @@ const populatePatchesBar = (patches) => {
 
 const loadPatch = () => {
   patchNameDisplay.text(store.patch.name)
-  show(saveUpdateButton)
   setPatchInfo(store.patch)
   checkPatchOwnership()
 }
@@ -198,6 +197,7 @@ const showPatchSuccess = res => {
   // hidePatchesBar()
   store.patch = res.patch
   loadPatch()
+  synth.displayValues()
 }
 const showPatchError = res => {
   console.log('showPatchError')
