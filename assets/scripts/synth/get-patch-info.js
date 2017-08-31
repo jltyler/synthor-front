@@ -1,5 +1,5 @@
 module.exports = () => {
-  console.log('getPatchInfo');
+  // console.log('getPatchInfo');
   return {
     patch: {
       name: $('#patch-name-input').val(),

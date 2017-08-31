@@ -11,7 +11,7 @@ const onSignUp = e => {
     return
   }
   ui.showAuthLoader()
-  console.log('data:', data)
+  // console.log('data:', data)
   api.signUp(data)
     .then(ui.signUpSuccess)
     .then(() => api.logIn(data))
@@ -27,7 +27,7 @@ const onLogIn = e => {
     return
   }
   ui.showAuthLoader()
-  console.log('data:', data)
+  // console.log('data:', data)
   api.logIn(data)
     .then(ui.logInSuccess)
     .catch(ui.logInError)
@@ -40,8 +40,8 @@ const onSignOut = e => {
       .then(ui.signOutSuccess)
       .catch(ui.signOutError)
   } else {
-    console.log('No user!')
-    console.log(store.user)
+    // console.log('No user!')
+    // console.log(store.user)
   }
 }
 
@@ -58,8 +58,8 @@ const onChangepwd = e => {
       .then(ui.changepwdSuccess)
       .catch(ui.changepwdError)
   } else {
-    console.log('No user!')
-    console.log(store.user)
+    // console.log('No user!')
+    // console.log(store.user)
   }
 }
 

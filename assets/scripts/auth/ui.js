@@ -52,20 +52,20 @@ const hideAuthLoader = () => {
 }
 
 const signUpSuccess = res => {
-  console.log('signUpSuccess')
+  // console.log('signUpSuccess')
 }
 const signUpError = res => {
-  console.log('signUpError')
-  console.log(res)
+  // console.log('signUpError')
+  // console.log(res)
   showError()
   hideAuthLoader()
 }
 
 const logInSuccess = res => {
-  console.log('logInSuccess')
-  console.log(res)
+  // console.log('logInSuccess')
+  // console.log(res)
   store.user = res.user
-  console.log('res.user:', res.user)
+  // console.log('res.user:', res.user)
   hide(signupButton)
   hide(loginButton)
   hide(credentialsForm)
@@ -76,33 +76,33 @@ const logInSuccess = res => {
   hideAuthLoader()
 }
 const logInError = res => {
-  console.log('logInError')
-  console.log(res)
+  // console.log('logInError')
+  // console.log(res)
   showError()
   hideAuthLoader()
 }
 
 const signOutSuccess = res => {
-  console.log('signOutSuccess')
+  // console.log('signOutSuccess')
   store.user = null
   resetAuthArea()
   synthUi.resetPatchSaveArea()
   hide($('#synth-auth-div'))
 }
 const signOutError = res => {
-  console.log('signOutError')
-  console.log(res)
+  // console.log('signOutError')
+  // console.log(res)
 }
 
 const changepwdSuccess = res => {
-  console.log('changepwdSuccess')
+  // console.log('changepwdSuccess')
   hideChangepwdForm()
   changepwdForm.children('input').val('')
   hideAuthLoader()
 }
 const changepwdError = res => {
-  console.log('changepwdError')
-  console.log(res)
+  // console.log('changepwdError')
+  // console.log(res)
   showError()
   hideAuthLoader()
 }

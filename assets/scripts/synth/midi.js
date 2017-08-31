@@ -6,7 +6,9 @@ navigator.requestMIDIAccess()
   .then(midi => {
     smi.attach(midi)
   })
-  .catch(console.log)
+  .catch(err => {
+    // console.log(err)
+  })
 
 const logMidiInputs = () => {
   // console.log('easymidi.getInputs()')

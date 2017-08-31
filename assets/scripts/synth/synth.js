@@ -198,7 +198,7 @@ const frequencyFromNum = function (note) {
 
 // Plays a note
 const playNote = (note, frequency) => {
-  console.log('synth.playNote', note, frequency);
+  // console.log('synth.playNote', note, frequency);
   if (!osc1[note]) {
     osc1[note] = [new Voice(frequencyFromNum(note), 0)]
   } else {
@@ -324,8 +324,8 @@ const setGlobalVolume = value => {
 }
 
 const displayValues = () => {
-  console.log('filterOptions', filterOptions)
-  console.log('oscOptions', oscOptions)
+  // console.log('filterOptions', filterOptions)
+  // console.log('oscOptions', oscOptions)
 }
 
 module.exports = {

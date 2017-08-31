@@ -1,5 +1,5 @@
 module.exports = (patch) => {
-  console.log('setPatchInfo:', patch)
+  // console.log('setPatchInfo:', patch)
   $('#osc1-volume').val(patch.osc1Volume * 100).trigger('change')
   $('#osc1-octave').val(patch.osc1Octave).trigger('change')
   $('#osc1-detune').val(patch.osc1Detune).trigger('change')
