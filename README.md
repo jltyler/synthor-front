@@ -9,6 +9,8 @@ API repo: https://github.com/jltyler/synthor-api
 ## What is this?
 Synthor is a simple synthesizer that utilizes the Web Audio API to generate audio signals for playback. 2 oscillators can be utilized to generate the original waveform. Both of these oscillators feed into a 12dB lowpass filter. Patches (settings) can be saved to and loaded from a back end. You can load any patches you did not create provided they are not set to private patches.
 
+![Synthor Screenshot](https://dl.dropboxusercontent.com/s/sm8xz31h13wp2ne/Synthor%20Screenshot.png)
+
 ## Usage
 
 ### Oscillator controls
