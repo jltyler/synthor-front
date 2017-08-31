@@ -33,6 +33,7 @@ module.exports = () => {
       filterFrequency: +$('#filter-freq').val(),
       filterQ: +$('#filter-Q').val(),
       filterEnv: +$('#filter-env').val(),
+      filterTremoloWaveform: $('#filter-trem-waveform').val(),
       filterTremoloAmp: +$('#filter-trem-amp').val(),
       filterTremoloFreq: +$('#filter-trem-freq').val(),
       filterAttack: +$('#filter-attack').val(),

@@ -29,6 +29,7 @@ module.exports = (patch) => {
   $('#filter-freq').val(patch.filterFrequency).trigger('change')
   $('#filter-Q').val(patch.filterQ).trigger('change')
   $('#filter-env').val(patch.filterEnv).trigger('change')
+  $('#filter-trem-waveform').val(patch.filterTremoloWaveform).trigger('change')
   $('#filter-trem-amp').val(patch.filterTremoloAmp).trigger('change')
   $('#filter-trem-freq').val(patch.filterTremoloFreq).trigger('change')
   $('#filter-attack').val(patch.filterAttack).trigger('change')

@@ -176,6 +176,10 @@ $('#filter-env').knob(Object.assign({
 }, mediumKnob, blueKnob))
 
 // Filter tremolo
+$('#filter-trem-waveform').on('change', e => {
+  synth.setFilterTremoloWaveform(e.target.value)
+})
+
 $('#filter-trem-amp').knob(Object.assign({
   min: 0,
   max: 2000,

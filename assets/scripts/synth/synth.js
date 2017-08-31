@@ -29,6 +29,7 @@ const filterOptions = {
   freq: 7500,
   q: 5,
   env: 0,
+  tremWaveform: 'sine',
   tremAmp: 0,
   tremFreq: 0,
   attack: 0.1,
@@ -109,6 +110,7 @@ class Voice {
 
     // Filter Tremolo
     this.filterTremOsc = audioCtx.createOscillator()
+    this.filterTremOsc.type = filterOptions.tremWaveform
     this.filterTremOsc.frequency.value = filterOptions.tremFreq
     this.filterTremGain = audioCtx.createGain()
     this.filterTremGain.gain.value = filterOptions.tremAmp
@@ -275,6 +277,10 @@ const setFilterEnv = value => {
   filterOptions.env = value
 }
 
+const setFilterTremoloWaveform = value => {
+  filterOptions.tremWaveform = value
+}
+
 const setFilterTremoloAmp = value => {
   filterOptions.tremAmp = value
 }
@@ -321,6 +327,7 @@ module.exports = {
   setFilterFreq,
   setFilterQ,
   setFilterEnv,
+  setFilterTremoloWaveform,
   setFilterTremoloAmp,
   setFilterTremoloFreq,
   setFilterEnvelopeAttack,
