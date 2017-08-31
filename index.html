@@ -61,7 +61,7 @@
               <option value="f" selected>Public</option>
             </select>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div id="synth-auth-div" class="synth-auth-div hidden">
               <!-- Show the save form button -->
               <button id="show-save-form-button" class="btn btn-out btn-fade btn-lg btn-lblue">Save</button>
@@ -79,6 +79,9 @@
               <button id="confirm-delete-button" class="btn btn-out btn-fade btn-lg btn-green hidden">Confirm</button>
               <button id="cancel-delete-button" class="btn btn-out btn-fade btn-lg btn-red hidden">Cancel</button>
             </div>
+          </div>
+          <div class="col-md-2">
+            <button id="show-settings-bar" class="btn btn-lg btn-block btn-out btn-fade btn-green" data-toggle="modal" data-target="#settings-bar">Settings</button>
           </div>
         </div>
       </nav>
@@ -335,5 +338,21 @@
         </div>
       </div>
       <!-- END PATCHES BAR -->
+      <!-- START SETTINGS BAR -->
+      <div class="modal right fade settings-bar" id="settings-bar" tabindex="-1" role="dialog" aria-labelledby="patchesBarLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h2 class="modal-title" id="settings-bar-label">Settings</h2>
+            </div>
+            <div class="modal-body">
+              <h2>Volume</h2>
+              <input type="text" id="global-volume" value="100">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END SETTINGS BAR -->
     </body>
 </html>

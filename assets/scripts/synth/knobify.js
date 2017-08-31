@@ -196,7 +196,6 @@ $('#filter-trem-freq').knob(Object.assign({
   release: val => synth.setFilterTremoloFreq(val, 0),
 }, bigKnob))
 
-
 // Filter Envelope
 $('#filter-attack').knob(Object.assign({
   change: synth.setFilterEnvelopeAttack,
@@ -220,3 +219,11 @@ $('#filter-release').knob(Object.assign({
   change: synth.setFilterEnvelopeRelease,
   release: synth.setFilterEnvelopeRelease,
 }, adrKnob))
+
+// Settings bar
+$('#global-volume').knob(Object.assign({
+  width: 240,
+  height: 240,
+  change: val => synth.setGlobalVolume(val / 100),
+  release: val => synth.setGlobalVolume(val / 100),
+}, standardKnob, greenKnob))

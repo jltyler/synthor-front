@@ -5,10 +5,19 @@ const audioCtx = new window.AudioContext()
 const osc1 = {}
 const osc2 = {}
 
+// Global Compressor
+const globalCompressor = audioCtx.createDynamicsCompressor()
+globalCompressor.connect(audioCtx.destination)
+
+// Global volume node
+const globalVolumeGain = audioCtx.createGain()
+globalVolumeGain.gain.value = 1.0
+globalVolumeGain.connect(globalCompressor)
+
 // Main gain node for osc1
 const osc1GainNode = audioCtx.createGain()
 osc1GainNode.gain.value = 0.5
-osc1GainNode.connect(audioCtx.destination)
+osc1GainNode.connect(globalVolumeGain)
 
 // Compressor to clamp the max output for polyphony
 const osc1Compressor = audioCtx.createDynamicsCompressor()
@@ -17,7 +26,7 @@ osc1Compressor.connect(osc1GainNode)
 // Main gain node for osc2
 const osc2GainNode = audioCtx.createGain()
 osc2GainNode.gain.value = 0.5
-osc2GainNode.connect(audioCtx.destination)
+osc2GainNode.connect(globalVolumeGain)
 
 // Compressor to clamp the max output for polyphony
 const osc2Compressor = audioCtx.createDynamicsCompressor()
@@ -289,20 +298,24 @@ const setFilterTremoloFreq = value => {
   filterOptions.tremFreq = value
 }
 
-const setFilterEnvelopeAttack = (value) => {
+const setFilterEnvelopeAttack = value => {
   filterOptions.attack = value
 }
 
-const setFilterEnvelopeDecay = (value) => {
+const setFilterEnvelopeDecay = value => {
   filterOptions.decay = value
 }
 
-const setFilterEnvelopeSustain = (value) => {
+const setFilterEnvelopeSustain = value => {
   filterOptions.sustain = value
 }
 
-const setFilterEnvelopeRelease = (value) => {
+const setFilterEnvelopeRelease = value => {
   filterOptions.release = value
+}
+
+const setGlobalVolume = value => {
+  globalVolumeGain.gain.value = value
 }
 
 const displayValues = () => {
@@ -336,5 +349,6 @@ module.exports = {
   setFilterEnvelopeRelease,
   playNote,
   stopNote,
-  displayValues
+  setGlobalVolume,
+  displayValues,
 }
