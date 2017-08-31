@@ -112,7 +112,7 @@ for (let i = 0; i < 2; i++) {
   })
 
   $('#osc' + (i + 1) + '-trem-amp').knob(Object.assign({
-    min: 0,
+    min: -80,
     max: 80,
     change: val => synth.setOscTremoloAmp(val, i),
     release: val => synth.setOscTremoloAmp(val, i),

@@ -69,6 +69,7 @@ const onIndexPatch = e => {
 
 const attachHandlers = () => {
   $('#save-new-button').on('click', onCreatePatch)
+  $('#patch-name-form').on('submit', onCreatePatch)
   $('#confirm-save-update-button').on('click', onUpdatePatch)
   // $('#show-patches-bar').on('click', onIndexPatch)
   $('#patches-bar').on('show.bs.modal', onIndexPatch)

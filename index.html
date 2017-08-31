@@ -26,10 +26,12 @@
             <form id="credentials-form">
               <input type="text" placeholder="Username" name="credentials[email]" value="a">
               <input type="password" placeholder="Password"  name="credentials[password]" value="a">
+              <button class="hidden" type="submit">Submit</button>
             </form>
             <form id="changepwd-form" class="hidden">
               <input type="password" placeholder="Old Password" name="passwords[old]">
               <input type="password" placeholder="New Password"  name="passwords[new]">
+              <button class="hidden" type="submit">Submit</button>
             </form>
           </div>
           <!-- Auth Buttons -->
@@ -54,7 +56,10 @@
             <!-- Confirm text -->
             <h3 id="confirm-patch-action-display" class="confirm-patch-action-display text-center hidden">Are you sure?</h3>
             <!-- Input new patch name -->
-            <input type="text" id="patch-name-input" placeholder="Patch Name" class="patch-name-input hidden">
+            <form id="patch-name-form" class="patch-name-form">
+              <input type="text" id="patch-name-input" placeholder="Patch Name" class="patch-name-input hidden">
+              <button type="submit" class="hidden">Submit</button>
+            </form>
             <!-- Private selector -->
             <select id="patch-private" class="patch-private hidden">
               <option value="t">Private</option>

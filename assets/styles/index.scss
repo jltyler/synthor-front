@@ -84,6 +84,10 @@ input {
   transition: color 1s;
 }
 
+form.patch-name-form {
+  display: inline;
+}
+
 .patch-name-input,
 .patch-name-display,
 .confirm-patch-action-display

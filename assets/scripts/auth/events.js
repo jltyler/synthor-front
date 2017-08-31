@@ -74,8 +74,10 @@ const onCancelChangepwd = e => {
 const attachHandlers = () => {
   $('#signup-button').on('click', onSignUp)
   $('#login-button').on('click', onLogIn)
+  $('#credentials-form').on('submit', onLogIn)
   $('#signout-button').on('click', onSignOut)
   $('#changepwd-button').on('click', onChangepwd)
+  $('#changepwd-form').on('submit', onChangepwd)
 
   $('#show-changepwd-button').on('click', onShowChangepwdForm)
   $('#cancel-changepwd-button').on('click', onCancelChangepwd)
