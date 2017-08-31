@@ -265,6 +265,40 @@ const deletePatchError = res => {
   console.log(res)
 }
 
+const noteMap = {
+  'C3': 36,
+  'C#3': 37,
+  'D3': 38,
+  'D#3': 39,
+  'E3': 40,
+  'F3': 41,
+  'F#3': 42,
+  'G3': 43,
+  'G#3': 44,
+  'A3': 45,
+  'A#3': 46,
+  'B3': 47,
+  'C4': 48,
+  'C#4': 49,
+  'D4': 50,
+  'D#4': 51,
+  'E4': 52,
+  'F4': 53,
+  'F#4': 54,
+  'G4': 55,
+  'G#4': 56,
+  'A4': 57,
+  'A#4': 58,
+  'B4': 59,
+}
+
+const noteMapKeys = Object.keys(noteMap)
+// Convert note number to proper note frequency
+// 57 = A4
+const frequencyFromNum = function (note) {
+  return 440 * Math.pow(2, (note - 69) / 12)
+}
+
 const setupKeyboard = () => {
   console.log(window.innerWidth)
   const keyboard = new QwertyHancock({
@@ -279,13 +313,19 @@ const setupKeyboard = () => {
   })
 
   keyboard.keyDown = function (note, frequency) {
-    // console.log('kbnotepress:', note, '|', frequency)
-    synth.playNote(note, frequency)
+    console.log('kbnotepress:', note, '|', frequency)
+    if (noteMapKeys.includes(note)) {
+      synth.playNote(noteMap[note], frequency)
+    }
+    // synth.playNote(note, frequency)
   }
 
   keyboard.keyUp = function (note, frequency) {
-    // console.log('kbnoterelease:', note, '|', frequency)
-    synth.stopNote(note, frequency)
+    console.log('kbnoterelease:', note, '|', frequency)
+    // synth.stopNote(note, frequency)
+    if (noteMapKeys.includes(note)) {
+      synth.stopNote(noteMap[note], frequency)
+    }
   }
 }
 

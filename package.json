@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "jquery": "^3.2.1",
-    "qwerty-hancock": "^0.5.1"
+    "qwerty-hancock": "^0.5.1",
+    "simple-midi-input": "^1.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",

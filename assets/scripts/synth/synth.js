@@ -192,27 +192,32 @@ class Voice {
   }
 }
 
+const frequencyFromNum = function (note) {
+  return 440 * Math.pow(2, (note - 69) / 12)
+}
+
 // Plays a note
 const playNote = (note, frequency) => {
+  console.log('synth.playNote', note, frequency);
   if (!osc1[note]) {
-    osc1[note] = [new Voice(frequency, 0)]
+    osc1[note] = [new Voice(frequencyFromNum(note), 0)]
   } else {
-    osc1[note].push(new Voice(frequency, 0))
+    osc1[note].push(new Voice(frequencyFromNum(note), 0))
   }
   if (!osc2[note]) {
-    osc2[note] = [new Voice(frequency, 1)]
+    osc2[note] = [new Voice(frequencyFromNum(note), 1)]
   } else {
-    osc2[note].push(new Voice(frequency, 1))
+    osc2[note].push(new Voice(frequencyFromNum(note), 1))
   }
 }
 
 // Release a note
 const stopNote = (note, frequency) => {
-  if (osc1[note].length > 0) {
+  if (osc1[note] && osc1[note].length > 0) {
     const voice = osc1[note].shift()
     voice.release()
   }
-  if (osc2[note].length > 0) {
+  if (osc2[note] && osc2[note].length > 0) {
     const voice = osc2[note].shift()
     voice.release()
   }

@@ -9,6 +9,7 @@ const synth = require('./synth/synth')
 const authEvents = require('./auth/events')
 const synthEvents = require('./synth/events')
 const synthUi = require('./synth/ui')
+const midi = require('./synth/midi')
 
 $(() => {
   setAPIOrigin(location, config)
@@ -16,6 +17,7 @@ $(() => {
   synthEvents.attachHandlers()
   // synth.displayValues()
   synthUi.setupKeyboard()
+  midi.logMidiInputs()
 })
 
 // window.onresize = synthUi.setupKeyboard
