@@ -1,0 +1,23 @@
+@import 'colors';
+
+.loader {
+  border: 5px solid $bgcolor; /* Light grey */
+  border-top: 5px solid #80f; /* Blue */
+  border-bottom: 5px solid #80f; /* Blue */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  animation: spin 1s linear infinite;
+}
+
+.loader.loader-big {
+  border-width: 15px;
+  width: 160px;
+  height: 160px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

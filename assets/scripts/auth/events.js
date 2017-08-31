@@ -10,6 +10,7 @@ const onSignUp = e => {
     ui.showError('Enter a username and a password!')
     return
   }
+  ui.showAuthLoader()
   console.log('data:', data)
   api.signUp(data)
     .then(ui.signUpSuccess)
@@ -25,6 +26,7 @@ const onLogIn = e => {
     ui.showError('Enter a username and a password!')
     return
   }
+  ui.showAuthLoader()
   console.log('data:', data)
   api.logIn(data)
     .then(ui.logInSuccess)
@@ -50,6 +52,7 @@ const onChangepwd = e => {
     ui.showError('Enter your old password and your new password!')
     return
   }
+  ui.showAuthLoader()
   if (store.user) {
     api.changepwd(data)
       .then(ui.changepwdSuccess)

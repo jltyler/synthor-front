@@ -20,7 +20,9 @@ const changepwdForm = $('#changepwd-form')
 const showChangepwdButton = $('#show-changepwd-button')
 const cancelChangepwdButton = $('#cancel-changepwd-button')
 
+// Displays
 const authErrorDisplay = $('#auth-error-display')
+const authLoader = $('#auth-loader')
 
 const resetAuthArea = () => {
   show(signupButton)
@@ -41,6 +43,14 @@ const showError = message => {
   }, 3000)
 }
 
+const showAuthLoader = () => {
+  show(authLoader)
+}
+
+const hideAuthLoader = () => {
+  hide(authLoader)
+}
+
 const signUpSuccess = res => {
   console.log('signUpSuccess')
 }
@@ -48,6 +58,7 @@ const signUpError = res => {
   console.log('signUpError')
   console.log(res)
   showError()
+  hideAuthLoader()
 }
 
 const logInSuccess = res => {
@@ -62,11 +73,13 @@ const logInSuccess = res => {
   show(showChangepwdButton)
   show($('#synth-auth-div'))
   credentialsForm.children('input').val('')
+  hideAuthLoader()
 }
 const logInError = res => {
   console.log('logInError')
   console.log(res)
   showError()
+  hideAuthLoader()
 }
 
 const signOutSuccess = res => {
@@ -85,11 +98,13 @@ const changepwdSuccess = res => {
   console.log('changepwdSuccess')
   hideChangepwdForm()
   changepwdForm.children('input').val('')
+  hideAuthLoader()
 }
 const changepwdError = res => {
   console.log('changepwdError')
   console.log(res)
   showError()
+  hideAuthLoader()
 }
 
 const showChangepwdForm = () => {
@@ -117,5 +132,6 @@ module.exports = {
   changepwdError,
   showChangepwdForm,
   hideChangepwdForm,
-  showError
+  showError,
+  showAuthLoader
 }

@@ -55,6 +55,7 @@ const onDeletePatch = e => {
 
 const onIndexPatch = e => {
   // e.preventDefault()
+  ui.showPatchesBarLoader()
   if (store.user) {
     api.indexPatch()
       .then(ui.indexPatchSuccess)

@@ -29,8 +29,8 @@ const patchNameDisplay = $('#patch-name-display')
 const confirmPatchActionDisplay = $('#confirm-patch-action-display')
 const patchesBar = $('#patches-bar')
 const patchesList = $('#patches-list')
-
 const authErrorDisplay = $('#auth-error-display')
+const patchesBarLoader = $('#patches-bar-loader')
 
 const showError = message => {
   authErrorDisplay.html(message || 'An error has occured.<br />Please try again.')
@@ -129,6 +129,14 @@ const hidePatchesBar = () => {
   patchesBar.removeClass('patches-popout')
 }
 
+const showPatchesBarLoader = () => {
+  show(patchesBarLoader)
+}
+
+const hidePatchesBarLoader = () => {
+  hide(patchesBarLoader)
+}
+
 const checkPatchOwnership = () => {
   if (store.patch && store.user) {
     if (store.patch._owner === store.user.id) {
@@ -204,11 +212,14 @@ const indexPatchSuccess = res => {
   console.log('indexPatchSuccess')
   console.log(res)
   populatePatchesBar(res.patches)
+  hidePatchesBarLoader()
   // showPatchesBar()
 }
 const indexPatchError = res => {
   console.log('indexPatchError')
   console.log(res)
+  showError()
+  hidePatchesBarLoader()
 }
 
 const showPatchSuccess = res => {
@@ -222,6 +233,7 @@ const showPatchSuccess = res => {
 const showPatchError = res => {
   console.log('showPatchError')
   console.log(res)
+  showError()
 }
 
 const deletePatchSuccess = res => {
@@ -269,6 +281,7 @@ module.exports = {
   showPatchesBar,
   hidePatchesBar,
   resetPatchSaveArea,
+  showPatchesBarLoader,
 
   createPatchSuccess,
   createPatchError,
