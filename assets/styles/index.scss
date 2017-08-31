@@ -118,16 +118,20 @@ input {
   background-color: #444;
   // border: 2px solid #afa;
   border-radius: 10px;
-  color: #afa;
+  color: lighten($purple, 20%);
   font-size: 20px;
   margin-bottom: 4px;
   padding: 8px;
 }
 
-.patch-item > span {
-  display: inline-block;
-  width: 100%;
+.patch-item.private {
+  color: lighten($green, 20%);
 }
+
+// .patch-item > span {
+//   display: inline-block;
+//   width: 100%;
+// }
 
 .virtual-keyboard-wrapper {
   margin: 16px auto;

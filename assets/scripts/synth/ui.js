@@ -5,6 +5,7 @@ const synth = require('./synth')
 
 // Helpers and templates
 const patchTemplate = require('../templates/patch.hbs')
+const patchPublicTemplate = require('../templates/patch-public.hbs')
 const setPatchInfo = require('./set-patch-info')
 const hide = b => b.addClass('hidden')
 const show = b => b.removeClass('hidden')
@@ -154,7 +155,24 @@ const checkPatchOwnership = () => {
 
 const populatePatchesBar = (patches) => {
   patchesList.html('')
-  const patchesHTML = patchTemplate({patches})
+  patches.sort((a, b) => a.name.localeCompare(b.name))
+  const myPatches = []
+  const pubPatches = []
+  let patchesHTML = ''
+  if (store.user) {
+    patches.forEach(p => {
+      if (p._owner.toString() === store.user.id.toString()) {
+        console.log('pushing myPatch:', p._id)
+        myPatches.push(p)
+      } else {
+        console.log('pushing pubPatch:', p._id)
+        pubPatches.push(p)
+      }
+    })
+    patchesHTML = patchTemplate({myPatches, pubPatches})
+  } else {
+    patchesHTML = patchPublicTemplate({patches})
+  }
   patchesList.append(patchesHTML)
   $('.load-patch-button').on('click', e => {
     const parent = $(e.target).closest('.patch-item')[0]

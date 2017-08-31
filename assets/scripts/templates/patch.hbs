@@ -1,7 +1,27 @@
-{{#each patches as |patch|}}
-  <div data-id="{{patch.id}}" class="patch-item">
-    <span>{{patch.name}}</span>
-    {{!-- <button class="btn btn-block btn-success load-patch-button">Load!</button> --}}
-    <button class="btn btn-block btn-out btn-fade btn-green load-patch-button">Load this patch</button>
-  </div>
-{{/each}}
+<h3>My patches</h3>
+<hr />
+{{#if myPatches.length}}
+  {{#each myPatches as |patch|}}
+    <div data-id="{{patch.id}}" class="patch-item private">
+      <h4>{{patch.name}}</h4>
+      {{!-- <button class="btn btn-block btn-success load-patch-button">Load!</button> --}}
+      <button class="btn btn-block btn-out btn-fade btn-green load-patch-button private">Load this patch</button>
+    </div>
+  {{/each}}
+{{else}}
+  <h3>You don't have any patches!<br />Maybe you should make one?</h3>
+  <hr />
+{{/if}}
+<h3>Public patches</h3>
+<hr />
+{{#if pubPatches.length}}
+  {{#each pubPatches as |patch|}}
+    <div data-id="{{patch.id}}" class="patch-item">
+      <h4>{{patch.name}}</h4>
+      {{!-- <button class="btn btn-block btn-success load-patch-button">Load!</button> --}}
+      <button class="btn btn-block btn-out btn-fade btn-green load-patch-button">Load this patch</button>
+    </div>
+  {{/each}}
+{{else}}
+  <h3>No patches found.</h3>
+{{/if}}

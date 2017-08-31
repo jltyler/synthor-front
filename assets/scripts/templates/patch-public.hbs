@@ -1,0 +1,11 @@
+{{#if patches.length}}
+  {{#each patches as |patch|}}
+    <div data-id="{{patch.id}}" class="patch-item">
+      <h3>{{patch.name}}</h3>
+        {{!-- <button class="btn btn-block btn-success load-patch-button">Load!</button> --}}
+        <button class="btn btn-block btn-out btn-fade btn-green load-patch-button">Load this patch</button>
+    </div>
+  {{/each}}
+{{else}}
+  <h3>No patches found. <br />Maybe you should make one?</h3>
+{{/if}}

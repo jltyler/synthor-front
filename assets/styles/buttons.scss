@@ -65,10 +65,22 @@
 
 .btn.load-patch-button {
   background-color: #000;
-  border: 1px solid $green;
+  border: 1px solid $purple;
+  color: $purple;
 }
 
 .btn.load-patch-button:hover {
+  background-color: $purple;
+  color: #000;
+}
+
+.btn.load-patch-button.private {
+  background-color: #000;
+  border: 1px solid $green;
+  color: $green;
+}
+
+.btn.load-patch-button.private:hover {
   background-color: $green;
   color: #000;
 }
