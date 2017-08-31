@@ -290,6 +290,18 @@ const noteMap = {
   'A4': 57,
   'A#4': 58,
   'B4': 59,
+  'C5': 60,
+  'C#5': 61,
+  'D5': 62,
+  'D#5': 63,
+  'E5': 64,
+  'F5': 65,
+  'F#5': 66,
+  'G5': 67,
+  'G#5': 68,
+  'A5': 69,
+  'A#5': 70,
+  'B5': 71,
 }
 
 const noteMapKeys = Object.keys(noteMap)
@@ -306,7 +318,7 @@ const setupKeyboard = () => {
     width: 750,
     height: 180,
     octaves: 2,
-    startNote: 'C3',
+    startNote: 'C4',
     whiteNotesColour: 'white',
     blackNotesColour: 'black',
     hoverColour: '#9900ff'
