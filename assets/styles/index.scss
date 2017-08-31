@@ -1,17 +1,12 @@
+@import 'reset';
+// @import 'normalize';
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 @import url(https://fonts.googleapis.com/css?family=Cuprum:700|Days+One);
-@import 'normalize';
 @import 'colors';
 @import 'buttons';
 @import 'modal';
-@import 'osc';
-
-$bgcolor: #222;
-$lblue: #99f;
-$blue: #40f;
-$green: lime;
-$red: red;
+@import 'synth';
 
 body {
   background-color: $bgcolor;
@@ -27,8 +22,9 @@ h4 {
 }
 
 .main-title {
+  font-size: 32px;
   font-family: 'Days One';
-  margin: .35em;
+  margin: .5em;
 }
 
 button,
@@ -56,6 +52,19 @@ select {
 input {
   font-size: 18px;
   width: 100%;
+}
+
+.auth-nav input {
+  margin-top: 1px;
+}
+
+.synth-nav {
+  padding: 9px 0;
+  background-color: #333;
+}
+
+.synth-nav select {
+  font-size: 22px;
 }
 
 .nav ul {
@@ -94,6 +103,16 @@ input {
   display: inline-block;
 }
 
+.synth-controls {
+  margin-top: 16px;
+}
+
+.section {
+  background-color: $bgsection;
+  border-radius: 15px;
+  padding: 1em;
+}
+
 .patch-item {
   background-color: #444;
   // border: 2px solid #afa;
@@ -109,20 +128,11 @@ input {
   width: 100%;
 }
 
-.btn.load-patch-button {
-  background-color: #000;
-  border: 1px solid lime;
-}
-
-.btn.load-patch-button:hover {
-  background-color: lime;
-  color: #000;
-}
-
 .virtual-keyboard-wrapper {
-  margin: 0 auto;
+  margin: 16px auto;
   width: 753px;
   border: 5px solid #ddd;
+  border-radius: 5px;
 }
 
 // Fix misaligned keys on the keyboard

@@ -1,0 +1,36 @@
+@import 'colors';
+
+.knob-div {
+  background-color: $bgknob;
+  border-radius: 10px;
+  padding: .1em .8em;
+  display: inline-block;
+  margin: 0 .2em;
+  text-align: center;
+}
+
+.wave-div {
+  margin: 10px 0;
+}
+
+.wave-div select {
+  font-size: 20px;
+}
+
+.knob-div.side {
+  // margin-top: 1em;
+}
+
+.env-div {
+  background-color: $bgknob;
+  border-radius: 10px;
+  padding: .5em .8em .1em;
+  display: inline-block;
+  margin: 0 .2em;
+  text-align: center;
+}
+
+.env-knob-div {
+  margin: 1px 6px;
+  display: inline-block;
+}

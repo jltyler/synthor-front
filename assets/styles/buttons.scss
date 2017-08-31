@@ -54,9 +54,21 @@
 }
 
 .btn.btn-auth {
+  margin-top: 14px;
   width: 48%;
 }
 
 .btn.btn-select {
+  margin-top: 14px;
   width: 24%
+}
+
+.btn.load-patch-button {
+  background-color: #000;
+  border: 1px solid $green;
+}
+
+.btn.load-patch-button:hover {
+  background-color: $green;
+  color: #000;
 }

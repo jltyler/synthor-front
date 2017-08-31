@@ -1,4 +1,8 @@
 $bgcolor: #222;
+$bgnav: #223;
+// $bgsection: lighten($bgcolor, 10%);
+$bgsection: #334;
+$bgknob: darken($bgsection, 8%);
 $lblue: #99f;
 $blue: #40f;
 $green: lime;

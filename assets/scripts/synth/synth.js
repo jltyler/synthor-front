@@ -48,6 +48,7 @@ const oscOptions = [
     octave: 1.0,
     unison: 1,
     pan: 0,
+    tremWaveform: 'sine',
     tremAmp: 0,
     tremFreq: 0
   },
@@ -61,6 +62,7 @@ const oscOptions = [
     octave: 1.0,
     unison: 1,
     pan: 0,
+    tremWaveform: 'sine',
     tremAmp: 0,
     tremFreq: 0
   }
@@ -81,6 +83,7 @@ class Voice {
 
     // Osc Tremolo
     this.tremOsc = audioCtx.createOscillator()
+    this.tremOsc.type = this.opt.tremWaveform
     this.tremOsc.frequency.value = this.opt.tremFreq
     this.tremGain = audioCtx.createGain()
     this.tremGain.gain.value = this.opt.tremAmp
@@ -232,6 +235,10 @@ const setOscPan = (value, osc = 0) => {
   oscOptions[osc].pan = value
 }
 
+const setOscTremoloWaveform = (value, osc = 0) => {
+  oscOptions[osc].tremWaveform = value
+}
+
 const setOscTremoloAmp = (value, osc = 0) => {
   oscOptions[osc].tremAmp = value
 }
@@ -304,6 +311,7 @@ module.exports = {
   setOscWaveform,
   setOscUnison,
   setOscPan,
+  setOscTremoloWaveform,
   setOscTremoloAmp,
   setOscTremoloFreq,
   setOscEnvelopeAttack,
