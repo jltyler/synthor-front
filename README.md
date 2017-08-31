@@ -12,7 +12,16 @@ Synthor is a simple synthesizer that utilizes the Web Audio API to generate audi
 ![Synthor Screenshot](https://dl.dropboxusercontent.com/s/sm8xz31h13wp2ne/Synthor%20Screenshot.png)
 
 ## Usage
+### General
+Change settings on the two oscillators to set up a couple basic waveforms.
 
+Use the lowpass filter settings to modify the output.
+
+Click notes on the virtual keyboard at the bottom to play your patch.
+
+Use your QWERTY keyboard to play notes. ASDF row plays the white notes and QWERTY row plays the black notes.
+
+Save patches to the backend so you can load them later or elsewhere.
 ### Oscillator controls
 - Volume: The overall gain of the oscillator
 - Octave: Lower or raise the octave
@@ -58,8 +67,14 @@ After getting CRUD actions to work I finalized the UI and styling and added a so
 
 And of course when I needed a small break I jammed out on the synth and made some cool noises with it.
 
-## Planned features
+## Planned features and current issues
+- Mobile works but the keyboard pushes off the screen
+- Tremolo controls affect the frequency absolutely. I wnat to add a knob to allow relative control measured in cents
 - Delay settings to get some cool echo effects
+- Distortion effect
+- Reverb effect
+- Different filters
+- Controls for unison spread range
 - Saving and loading oscillators as a separate entity to allow mixing and matching with greater ease
 - MIDI integration to allow an external MIDI device to play notes through the synth engine
 
