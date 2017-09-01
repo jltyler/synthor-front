@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Synthor</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Do not add `script` tags-->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    </head>
+    <body class="container-fluid">
+      <nav class="row nav">
+        <div class="row auth-nav">
+          <div class="col-md-3 title text-center">
+            <h2 class="main-title">Synthor</h2>
+          </div>
+          <div class="col-md-3 text-center error-display">
+            <h4 id="auth-error-display"></h4>
+            <div id="auth-loader" class="loader hidden"></div>
+          </div>
+          <!-- Auth Forms -->
+          <div class="col-md-3">
+            <form id="credentials-form">
+              <input type="text" placeholder="Username" name="credentials[email]" value="">
+              <input type="password" placeholder="Password"  name="credentials[password]" value="">
+              <button class="hidden" type="submit">Submit</button>
+            </form>
+            <form id="changepwd-form" class="hidden">
+              <input type="password" placeholder="Old Password" name="passwords[old]">
+              <input type="password" placeholder="New Password"  name="passwords[new]">
+              <button class="hidden" type="submit">Submit</button>
+            </form>
+          </div>
+          <!-- Auth Buttons -->
+          <div class="col-md-3">
+            <button id="login-button" type="button"class="btn btn-out btn-fade btn-auth btn-lblue">Log In</button>
+            <button id="signup-button" type="button"class="btn btn-out btn-fade btn-auth btn-blue">Sign Up</button>
+            <button id="show-changepwd-button" type="button"class="btn btn-out btn-fade btn-auth btn-blue hidden">Change Password</button>
+            <button id="changepwd-button" type="button"class="btn btn-out btn-fade btn-auth btn-green btn-select hidden">Submit</button>
+            <button id="cancel-changepwd-button" type="button"class="btn btn-out btn-fade btn-red btn-auth btn-select hidden">Cancel</button>
+            <button id="signout-button" type="button"class="btn btn-out btn-fade btn-auth btn-lblue hidden">Sign Out</button>
+          </div>
+        </div>
+        <!-- SYNTH CRUD STUFF -->
+        <div class="row synth-nav">
+          <div class="col-md-3">
+            <!-- Show patches sidebar -->
+            <button id="show-patches-bar" data-toggle="modal" data-target="#patches-bar" class="btn btn-out btn-fade btn-lg btn-block btn-lblue">Load Patches</button>
+          </div>
+          <div class="col-md-3">
+            <!-- Display patch name -->
+            <h3 id="patch-name-display" class="patch-name-display text-center">New Patch</h3>
+            <!-- Confirm text -->
+            <h3 id="confirm-patch-action-display" class="confirm-patch-action-display text-center hidden">Are you sure?</h3>
+            <!-- Input new patch name -->
+            <form id="patch-name-form" class="patch-name-form">
+              <input type="text" id="patch-name-input" placeholder="Patch Name" class="patch-name-input hidden">
+              <button type="submit" class="hidden">Submit</button>
+            </form>
+            <!-- Private selector -->
+            <select id="patch-private" class="patch-private hidden">
+              <option value="t">Private</option>
+              <option value="f" selected>Public</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <div id="synth-auth-div" class="synth-auth-div hidden">
+              <!-- Show the save form button -->
+              <button id="show-save-form-button" class="btn btn-out btn-fade btn-lg btn-lblue">Save</button>
+              <!-- Confirm and cancel save new button -->
+              <button id="save-new-button" class="btn btn-out btn-fade btn-lg btn-green hidden">Confirm</button>
+              <button id="cancel-save-new-button" class="btn btn-out btn-fade btn-lg btn-red hidden">Cancel</button>
+              <!-- Overwrite current patch -->
+              <button id="save-update-button" class="btn btn-out btn-fade btn-lg btn-blue hidden">Save (overwrite)</button>
+              <!-- Confirm and cancel save update -->
+              <button id="confirm-save-update-button" class="btn btn-out btn-fade btn-lg btn-green hidden">Confirm</button>
+              <button id="cancel-save-update-button" class="btn btn-out btn-fade btn-lg btn-red hidden">Cancel</button>
+              <!-- Delete current patch -->
+              <button id="delete-button" class="btn btn-out btn-fade btn-lg btn-red hidden">Delete patch</button>
+              <!-- Confirm and cancel delete -->
+              <button id="confirm-delete-button" class="btn btn-out btn-fade btn-lg btn-green hidden">Confirm</button>
+              <button id="cancel-delete-button" class="btn btn-out btn-fade btn-lg btn-red hidden">Cancel</button>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <button id="show-settings-bar" class="btn btn-lg btn-block btn-out btn-fade btn-green" data-toggle="modal" data-target="#settings-bar">Settings</button>
+          </div>
+        </div>
+      </nav>
+      <!-- END NAV -->
+      <!-- ACTUAL SYNTHESIZER CONTROLS -->
+      <div class="row synth-controls">
+        <!-- OSC 1 SECTION -->
+        <div class="col-md-4">
+          <div class="section osc1">
+            <div class="text-center">
+              <h1>Oscillator A</h1>
+              <div class="knob-div side">
+                <h4>Octave</h4>
+                <input type="text" id="osc1-octave" value="0" data-cursor="true">
+              </div>
+              <div class="knob-div">
+                <h3>Volume</h3>
+                <input type="text" id="osc1-volume" value="50">
+              </div>
+              <div class="knob-div side">
+                <h4>Detune</h4>
+                <input type="text" id="osc1-detune" value="0" data-cursor="true">
+              </div>
+            </div>
+            <div class="osc1-settings-div">
+              <div class="text-center wave-div">
+                <h3>Waveform</h3>
+                <select id="osc1-waveform">
+                  <option value="sine">Sine</option>
+                  <option value="sawtooth" selected>Sawtooth</option>
+                  <option value="square">Square</option>
+                  <option value="triangle">Triangle</option>
+                </select>
+              </div>
+              <div class="text-center">
+                <div class="knob-div">
+                  <h4>Unison</h4>
+                  <input type="text" id="osc1-unison" value="1" data-cursor="true">
+                </div>
+                <div class="knob-div">
+                  <h4>Panning</h4>
+                  <input type="text" id="osc1-pan" value="0" data-cursor="true">
+                </div>
+              </div>
+            </div>
+            <div class="osc1-tremolo-div text-center">
+              <h3>Tremolo</h3>
+              <div class="wave-div text-center">
+                <select id="osc1-trem-waveform">
+                  <option value="sine" selected>Sine</option>
+                  <option value="sawtooth">Sawtooth</option>
+                  <option value="square">Square</option>
+                  <option value="triangle">Triangle</option>
+                </select>
+              </div>
+              <div class="knob-div">
+                <h4>Amplitude</h4>
+                <input type="text" id="osc1-trem-amp" value="0">
+              </div>
+              <div class="knob-div">
+                <h4>Frequency</h4>
+                <input type="text" id="osc1-trem-freq" value="0">
+              </div>
+            </div>
+            <div class="osc1-envelope-div text-center">
+              <h3>Envelope</h3>
+              <div class="env-div">
+                <div class="env-knob-div">
+                  <input type="text" id="osc1-attack" value="0.1">
+                  <h4>A</h4>
+                </div>
+                <div class="env-knob-div">
+                  <input type="text" id="osc1-decay" value="0.1">
+                  <h4>D</h4>
+                </div>
+                <div class="env-knob-div">
+                  <input type="text" id="osc1-sustain" value="1.0">
+                  <h4>S</h4>
+                </div>
+                <div class="env-knob-div">
+                  <input type="text" id="osc1-release" value="0.3">
+                  <h4>R</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- OSC 2 SECTION -->
+        <div class="col-md-4 osc2">
+          <div class="section osc2">
+            <div class="text-center">
+              <h1>Oscillator B</h1>
+              <div class="knob-div side">
+                <h4>Octave</h4>
+                <input type="text" id="osc2-octave" value="0" data-cursor="true">
+              </div>
+              <div class="knob-div">
+                <h3>Volume</h3>
+                <input type="text" id="osc2-volume" value="50">
+              </div>
+              <div class="knob-div side">
+                <h4>Detune</h4>
+                <input type="text" id="osc2-detune" value="0" data-cursor="true">
+              </div>
+            </div>
+            <div class="osc2-settings-div">
+              <div class="wave-div text-center">
+                <h3>Waveform</h3>
+                <select id="osc2-waveform">
+                  <option value="sine">Sine</option>
+                  <option value="sawtooth" selected>Sawtooth</option>
+                  <option value="square">Square</option>
+                  <option value="triangle">Triangle</option>
+                </select>
+              </div>
+              <div class="text-center">
+                <div class="knob-div">
+                  <h4>Unison</h4>
+                  <input type="text" id="osc2-unison" value="1" data-cursor="true">
+                </div>
+                <div class="knob-div">
+                  <h4>Panning</h4>
+                  <input type="text" id="osc2-pan" value="0" data-cursor="true">
+                </div>
+              </div>
+            </div>
+            <div class="osc2-tremolo-div text-center">
+              <h3>Tremolo</h3>
+              <div class="wave-div text-center">
+                <select id="osc2-trem-waveform">
+                  <option value="sine" selected>Sine</option>
+                  <option value="sawtooth">Sawtooth</option>
+                  <option value="square">Square</option>
+                  <option value="triangle">Triangle</option>
+                </select>
+              </div>
+              <div class="knob-div">
+                <h4>Amplitude</h4>
+                <input type="text" id="osc2-trem-amp" value="0">
+              </div>
+              <div class="knob-div">
+                <h4>Frequency</h4>
+                <input type="text" id="osc2-trem-freq" value="0">
+              </div>
+            </div>
+            <div class="osc2-envelope-div text-center">
+              <h3>Envelope</h3>
+              <div class="env-div">
+                <div class="env-knob-div">
+                  <input type="text" id="osc2-attack" value="0.1">
+                  <h4>A</h4>
+                </div>
+                <div class="env-knob-div">
+                  <input type="text" id="osc2-decay" value="0.1">
+                  <h4>D</h4>
+                </div>
+                <div class="env-knob-div">
+                  <input type="text" id="osc2-sustain" value="1.0">
+                  <h4>S</h4>
+                </div>
+                <div class="env-knob-div">
+                  <input type="text" id="osc2-release" value="0.3">
+                  <h4>R</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- FILTER CONTROLS -->
+        <div class="col-md-4">
+          <div class="section filter">
+            <div class="text-center">
+              <h1>Lowpass Filter</h1>
+              <div class="knob-div side">
+                <h4>Q</h4>
+                <input type="text" id="filter-Q" value="5">
+              </div>
+              <div class="knob-div">
+                <h3>Cutoff</h3>
+                <input type="text" id="filter-freq" value="7500">
+              </div>
+              <div class="knob-div side">
+                <h4>Env</h4>
+                <input type="text" id="filter-env" value="0">
+              </div>
+            </div>
+            <div class="text-center">
+              <h3>Tremolo</h3>
+              <div class="wave-div text-center">
+                <select id="filter-trem-waveform">
+                  <option value="sine" selected>Sine</option>
+                  <option value="sawtooth">Sawtooth</option>
+                  <option value="square">Square</option>
+                  <option value="triangle">Triangle</option>
+                </select>
+              </div>
+              <div class="knob-div">
+                <h4>Amplitude</h4>
+                <input type="text" id="filter-trem-amp" value="0">
+              </div>
+              <div class="knob-div">
+                <h4>Frequency</h4>
+                <input type="text" id="filter-trem-freq" value="0">
+              </div>
+            </div>
+            <div class="text-center">
+              <h3>Envelope</h3>
+              <div class="env-div">
+                <div class="env-knob-div">
+                  <input type="text" id="filter-attack" value="0.1">
+                  <h4>A</h4>
+                </div>
+                <div class="env-knob-div">
+                  <input type="text" id="filter-decay" value="0.1">
+                  <h4>D</h4>
+                </div>
+                <div class="env-knob-div">
+                  <input type="text" id="filter-sustain" value="0.7">
+                  <h4>S</h4>
+                </div>
+                <div class="env-knob-div">
+                  <input type="text" id="filter-release" value="0.3">
+                  <h4>R</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END SYNTHESIZER CONTROLS -->
+      <!-- START VIRTUAL KEYBOARD -->
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="virtual-keyboard-wrapper">
+            <div id="virtual-keyboard" class="virtual-keyboard"></div>
+          </div>
+        </div>
+      </div>
+      <!-- END VIRTUAL KEYBOARD -->
+      <!-- START PATCHES BAR -->
+      <div class="modal left fade patches-bar" id="patches-bar" tabindex="-1" role="dialog" aria-labelledby="patchesBarLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h2 class="modal-title" id="patches-bar-label">Patches</h2>
+            </div>
+            <div class="modal-body">
+              <div id="patches-bar-loader" class="loader loader-big hidden">
+              </div>
+              <div id="patches-list" class="patches-list"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END PATCHES BAR -->
+      <!-- START SETTINGS BAR -->
+      <div class="modal right fade settings-bar" id="settings-bar" tabindex="-1" role="dialog" aria-labelledby="patchesBarLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h2 class="modal-title" id="settings-bar-label">Settings</h2>
+            </div>
+            <div class="modal-body">
+              <h2>Volume</h2>
+              <input type="text" id="global-volume" value="100">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END SETTINGS BAR -->
+    </body>
+</html>
