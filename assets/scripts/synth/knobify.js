@@ -20,6 +20,12 @@ const standardKnob = {
   bgColor: '#001'
 }
 
+const floatKnob = {
+  min: 0.0,
+  max: 1.0,
+  step: 0.05
+}
+
 const greenKnob = {
   fgColor: greenKnobColor,
   inputColor: greenTextColor
@@ -138,12 +144,9 @@ for (let i = 0; i < 2; i++) {
   }, adrKnob, blueKnob))
 
   $('#osc' + (i + 1) + '-sustain').knob(Object.assign({
-    min: 0,
-    max: 1,
-    step: 0.05,
     change: val => synth.setOscEnvelopeSustain(val, i),
     release: val => synth.setOscEnvelopeSustain(val, i),
-  }, smallKnob, greenKnob))
+  }, smallKnob, floatKnob, greenKnob))
 
   $('#osc' + (i + 1) + '-release').knob(Object.assign({
     change: val => synth.setOscEnvelopeRelease(val, i),
@@ -208,17 +211,28 @@ $('#filter-decay').knob(Object.assign({
 }, adrKnob, blueKnob))
 
 $('#filter-sustain').knob(Object.assign({
-  min: 0,
-  max: 1.0,
-  step: 0.05,
   change: synth.setFilterEnvelopeSustain,
   release: synth.setFilterEnvelopeSustain,
-}, smallKnob, greenKnob))
+}, smallKnob, floatKnob, greenKnob))
 
 $('#filter-release').knob(Object.assign({
   change: synth.setFilterEnvelopeRelease,
   release: synth.setFilterEnvelopeRelease,
 }, adrKnob))
+
+$('#delay-time').knob(Object.assign({
+  min: 0,
+  max: 8.0,
+  step: 0.05,
+  change: synth.setDelayTime,
+  release: synth.setDelayTime,
+}, bigKnob, blueKnob))
+
+$('#delay-gain').knob(Object.assign({
+  change: synth.setDelayGain,
+  release: synth.setDelayGain,
+}, bigKnob, floatKnob, blueKnob))
+
 
 // Settings bar
 $('#global-volume').knob(Object.assign({

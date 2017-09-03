@@ -14,10 +14,21 @@ const globalVolumeGain = audioCtx.createGain()
 globalVolumeGain.gain.value = 1.0
 globalVolumeGain.connect(globalCompressor)
 
+// Global delay
+const delayNode = audioCtx.createDelay(10.0)
+delayNode.delayTime.value = 0.6
+
+const delayGain = audioCtx.createGain()
+delayGain.gain.value = 0.0
+delayNode.connect(delayGain)
+delayGain.connect(delayNode)
+delayGain.connect(globalVolumeGain)
+
 // Main gain node for osc1
 const osc1GainNode = audioCtx.createGain()
 osc1GainNode.gain.value = 0.5
 osc1GainNode.connect(globalVolumeGain)
+osc1GainNode.connect(delayNode)
 
 // Compressor to clamp the max output for polyphony
 const osc1Compressor = audioCtx.createDynamicsCompressor()
@@ -27,6 +38,7 @@ osc1Compressor.connect(osc1GainNode)
 const osc2GainNode = audioCtx.createGain()
 osc2GainNode.gain.value = 0.5
 osc2GainNode.connect(globalVolumeGain)
+osc2GainNode.connect(delayNode)
 
 // Compressor to clamp the max output for polyphony
 const osc2Compressor = audioCtx.createDynamicsCompressor()
@@ -323,6 +335,14 @@ const setGlobalVolume = value => {
   globalVolumeGain.gain.value = value
 }
 
+const setDelayTime = value => {
+  delayNode.delayTime.value = value
+}
+
+const setDelayGain = value => {
+  delayGain.gain.value = value
+}
+
 const displayValues = () => {
   // console.log('filterOptions', filterOptions)
   // console.log('oscOptions', oscOptions)
@@ -356,4 +376,6 @@ module.exports = {
   stopNote,
   setGlobalVolume,
   displayValues,
+  setDelayTime,
+  setDelayGain
 }
