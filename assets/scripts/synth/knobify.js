@@ -221,17 +221,20 @@ $('#filter-release').knob(Object.assign({
 }, adrKnob))
 
 $('#delay-time').knob(Object.assign({
-  min: 0,
-  max: 8.0,
-  step: 0.05,
+  min: 0.01,
+  max: 5.0,
+  step: 0.01,
   change: synth.setDelayTime,
   release: synth.setDelayTime,
 }, bigKnob, blueKnob))
 
 $('#delay-gain').knob(Object.assign({
+  min: 0.0,
+  max: 0.99,
+  step: 0.01,
   change: synth.setDelayGain,
   release: synth.setDelayGain,
-}, bigKnob, floatKnob, blueKnob))
+}, bigKnob, blueKnob))
 
 
 // Settings bar

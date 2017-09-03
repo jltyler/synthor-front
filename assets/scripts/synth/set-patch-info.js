@@ -36,4 +36,6 @@ module.exports = (patch) => {
   $('#filter-decay').val(patch.filterDecay).trigger('change')
   $('#filter-sustain').val(patch.filterSustain).trigger('change')
   $('#filter-release').val(patch.filterRelease).trigger('change')
+  $('#delay-time').val(patch.delayTime).trigger('change')
+  $('#delay-gain').val(patch.delayGain).trigger('change')
 }

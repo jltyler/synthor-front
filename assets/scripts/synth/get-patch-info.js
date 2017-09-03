@@ -40,6 +40,8 @@ module.exports = () => {
       filterDecay: +$('#filter-decay').val(),
       filterSustain: +$('#filter-sustain').val(),
       filterRelease: +$('#filter-release').val(),
+      delayTime: +$('#delay-time').val(),
+      delayGain: +$('#delay-gain').val(),
     }
   }
 }
